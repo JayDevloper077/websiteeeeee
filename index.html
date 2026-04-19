@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>KRYPTO KOMBAT</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
-:root {
-  --cyan:#00f5d4; --red:#ff2d55; --gold:#f5c518; --green:#39ff14;
-  --purple:#b44fff; --bg:#050508; --bg2:#0a0a12; --bg3:#0f0f18;
-  --border:rgba(0,245,212,0.15);
-  --font-h:'Orbitron',monospace; --font-m:'Share Tech Mono',monospace;
+/* ── Tokens ──────────────────────────────────────────────────────────── */
+:root{
+  --cyan:#00f5d4;--red:#ff2d55;--gold:#f5c518;--green:#39ff14;--purple:#b44fff;
+  --bg:#050508;--bg2:#0a0a12;--bg3:#0f0f18;
+  --font-h:'Orbitron',monospace;--font-m:'Share Tech Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body,#root{height:100%}
 body{background:var(--bg);color:#e0e0f0;font-family:var(--font-m);overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:9999}
-.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,212,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,212,0.035) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);pointer-events:none;z-index:9999}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,212,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,212,.035) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
 
-/* Animations */
+/* ── Animations (untouched) ──────────────────────────────────────────── */
 @keyframes glitch{0%,100%{text-shadow:0 0 8px var(--cyan),0 0 20px var(--cyan);transform:none}20%{text-shadow:-3px 0 var(--red),3px 0 var(--cyan);transform:skewX(-2deg)}40%{text-shadow:3px 0 var(--purple),-3px 0 var(--cyan);transform:skewX(1deg)}60%{text-shadow:-2px 0 var(--red),2px 0 var(--cyan);transform:none}}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 var(--cyan)}50%{box-shadow:0 0 20px rgba(0,245,212,0.25),inset 0 0 10px rgba(0,245,212,0.04)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 var(--cyan)}50%{box-shadow:0 0 20px rgba(0,245,212,.25),inset 0 0 10px rgba(0,245,212,.04)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes flicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:.3}94%{opacity:1}97%{opacity:.6}98%{opacity:1}}
 @keyframes ring-expand{0%{transform:scale(.85);opacity:.6}100%{transform:scale(2.2);opacity:0}}
@@ -35,24 +35,150 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 @keyframes row-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
 @keyframes particle-rise{0%{transform:translateY(0) scale(1);opacity:.9}100%{transform:translateY(-110px) scale(0);opacity:0}}
 @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes bar-grow{from{width:0}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes scan-line{0%{top:-10%}100%{top:110%}}
+@keyframes neon-sweep{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes corner-pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes holo-flicker{0%,100%{opacity:1}88%{opacity:1}89%{opacity:.2}90%{opacity:1}95%{opacity:.7}96%{opacity:1}}
+@keyframes data-stream{0%{background-position:0 0}100%{background-position:0 -200px}}
+@keyframes stat-pop{0%{opacity:0;transform:translateY(20px) scale(.9)}60%{transform:translateY(-4px) scale(1.04)}100%{opacity:1;transform:none}}
+@keyframes shield-pulse{0%,100%{filter:drop-shadow(0 0 4px rgba(245,197,24,.4))}50%{filter:drop-shadow(0 0 16px rgba(245,197,24,.9))}}
+@keyframes podium-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes rank-slide{from{opacity:0;transform:translateX(-24px) skewX(-4deg)}to{opacity:1;transform:none}}
+@keyframes cyber-border{0%,100%{border-color:rgba(0,245,212,.15)}50%{border-color:rgba(0,245,212,.5)}}
+@keyframes avatar-ring{0%{transform:scale(1);opacity:.5}50%{transform:scale(1.15);opacity:.15}100%{transform:scale(1.3);opacity:0}}
 
-/* Scrollbar */
+/* ── Shared components ───────────────────────────────────────────────── */
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
 ::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
 
-/* Shared */
-.card{background:var(--bg2);border:1px solid rgba(255,255,255,0.07);border-radius:3px;position:relative;overflow:hidden}
+.card{background:var(--bg2);border:1px solid rgba(255,255,255,.07);border-radius:3px;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.4}
-.section-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
+.section-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
 .section-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,212,.3),transparent)}
 .clipped{clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
 .clipped-sm{clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%)}
-input,select{background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:#ccc;font-family:var(--font-m);font-size:13px;padding:10px 14px;outline:none;border-radius:2px;width:100%;transition:border-color .2s}
+input,select{background:var(--bg3);border:1px solid rgba(255,255,255,.1);color:#ccc;font-family:var(--font-m);font-size:13px;padding:10px 14px;outline:none;border-radius:2px;width:100%;transition:border-color .2s}
 input:focus,select:focus{border-color:rgba(0,245,212,.4)}
 select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300f5d4' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+
+/* Corner + scan effects */
+.corner-box{position:relative}
+.corner-box::before{content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);animation:corner-pulse 2.5s infinite;z-index:1}
+.corner-box::after{content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);animation:corner-pulse 2.5s infinite;z-index:1}
+.scan-hover{position:relative;overflow:hidden}
+.scan-hover::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,245,212,.4),transparent);top:-10%;animation:scan-line 3s linear infinite;pointer-events:none}
+.glow-row:hover td{text-shadow:0 0 8px rgba(0,245,212,.5)!important}
+
+/* ── Layout classes (responsive) ─────────────────────────────────────── */
+
+/* Page wrapper */
+.page{padding:40px 0 60px;animation:slide-up .5s ease;position:relative;z-index:1}
+.page-inner{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* Navbar */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(5,5,8,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,245,212,.09);height:58px;display:flex;align-items:center;padding:0 36px;gap:28px;box-shadow:0 1px 30px rgba(0,245,212,.07),0 4px 60px rgba(0,0,0,.6)}
+.nav-logo-text{display:flex;align-items:center;gap:6px;font-family:var(--font-h);font-weight:900;font-size:13px;letter-spacing:.08em}
+.nav-tabs{display:flex;gap:2px}
+.nav-bot{display:none}
+
+/* Ticker */
+.ticker{height:30px;overflow:hidden;background:rgba(0,245,212,.025);border-bottom:1px solid rgba(0,245,212,.07);display:flex;align-items:center}
+
+/* Arena */
+.arena-header{text-align:center;margin-bottom:48px}
+.battle-card{padding:40px;animation:pulse-glow 3.5s infinite;background:linear-gradient(135deg,#0a0a12,#0d0d1e)}
+.battle-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:8px}
+.coins-row{display:flex;align-items:center;gap:24px}
+.vs-col{display:flex;flex-direction:column;align-items:center;gap:12px;min-width:70px}
+.vs-line{width:1px;height:70px;background:linear-gradient(180deg,transparent,var(--red),transparent)}
+.arena-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.coin-orb{width:130px;height:130px}
+.coin-orb-ring{width:160px;height:160px}
+.coin-sym{font-size:26px}
+.coin-pct{font-size:38px}
+.coin-icon-size{font-size:52px}
+
+/* Leaderboard */
+.lb-stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(0,245,212,.1);overflow:hidden;margin-bottom:32px}
+.lb-podium{display:flex;gap:16px;justify-content:center;margin-bottom:40px;align-items:flex-end}
+.lb-filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+
+/* Profile */
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+
+/* Admin */
+.admin-form-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:flex-end}
+.admin-mgmt-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+/* ── Responsive breakpoints ──────────────────────────────────────────── */
+@media(max-width:860px){
+  .admin-form-grid{grid-template-columns:1fr 1fr}
+  .admin-create-btn{grid-column:span 2}
+}
+
+@media(max-width:640px){
+  /* Page */
+  .page{padding:20px 0 88px}
+  .page-inner{padding:0 14px}
+
+  /* Navbar */
+  .navbar{padding:0 14px;gap:10px;height:52px}
+  .nav-logo-text{display:none}
+  .nav-tabs{display:none}
+  .nav-bot{display:flex;position:fixed;bottom:0;left:0;right:0;height:54px;background:rgba(5,5,8,.97);border-top:1px solid rgba(0,245,212,.12);z-index:200;backdrop-filter:blur(14px)}
+
+  /* Ticker — shorter on mobile */
+  .ticker{height:26px}
+
+  /* Arena */
+  .arena-header{margin-bottom:24px}
+  .battle-card{padding:16px}
+  .battle-meta{margin-bottom:16px}
+  .coins-row{flex-direction:column;gap:12px}
+  .vs-col{flex-direction:row;gap:12px;min-width:auto}
+  .vs-line{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+  .arena-bottom{grid-template-columns:1fr}
+  .coin-orb{width:90px;height:90px}
+  .coin-orb-ring{width:110px;height:110px}
+  .coin-sym{font-size:18px}
+  .coin-pct{font-size:28px}
+  .coin-icon-size{font-size:36px}
+
+  /* Leaderboard */
+  .lb-stats{grid-template-columns:1fr 1fr}
+  .lb-podium{display:none}
+  .lb-stat-val{font-size:14px!important}
+  .lb-stat-label{font-size:8px!important}
+  /* Table — scroll + compact */
+  table{font-size:11px;min-width:520px}
+  td,th{padding:10px 10px!important}
+  .lb-badge-col{display:none}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+  /* Profile */
+  .profile-stats{grid-template-columns:1fr 1fr}
+  .profile-addr{font-size:9px!important}
+
+  /* Admin */
+  .admin-form-grid{grid-template-columns:1fr 1fr}
+  .admin-create-btn{grid-column:span 2;height:44px!important}
+  .admin-mgmt-grid{grid-template-columns:1fr}
+  .section-box{padding:16px}
+
+  /* General */
+  .hide-mob{display:none!important}
+  .show-mob{display:flex!important}
+}
+
+@media(max-width:400px){
+  .coin-orb{width:76px;height:76px}
+  .coin-orb-ring{width:94px;height:94px}
+  .coin-icon-size{font-size:30px}
+  .profile-stats{grid-template-columns:1fr 1fr}
+  .lb-stats{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -60,10 +186,10 @@ select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%
 <div id="root"></div>
 
 <script type="text/babel">
-const {useState,useEffect,useRef} = React;
+const {useState,useEffect,useRef}=React;
 
-/* ── Data ────────────────────────────────────────────────────────────── */
-const COINS = {
+/* ── Data ──────────────────────────────────────────────────────────────── */
+const COINS={
   BTC:{symbol:'BTC',name:'Bitcoin',  color:'#f7931a',icon:'₿',price:67420,change:+2.3},
   ETH:{symbol:'ETH',name:'Ethereum', color:'#627eea',icon:'Ξ',price:3210, change:-0.8},
   SOL:{symbol:'SOL',name:'Solana',   color:'#9945ff',icon:'◎',price:178,  change:+5.1},
@@ -73,220 +199,158 @@ const COINS = {
   AVAX:{symbol:'AVAX',name:'Avalanche',color:'#e84142',icon:'A',price:38, change:-1.1},
   LINK:{symbol:'LINK',name:'Chainlink',color:'#2a5ada',icon:'⬡',price:17, change:+3.6},
 };
-
-const LEADERBOARD_DATA = [
-  {rank:1, user:'CryptoNinja_X', wins:42,losses:8, streak:7, points:9840,badge:'LEGEND'},
-  {rank:2, user:'BlockMaster99', wins:38,losses:12,streak:5, points:8210,badge:'ELITE'},
-  {rank:3, user:'SatoshiWolf',   wins:35,losses:15,streak:3, points:7350,badge:'ELITE'},
-  {rank:4, user:'DeFi_Phantom',  wins:29,losses:11,streak:4, points:6120,badge:'PRO'},
-  {rank:5, user:'MoonHunter',    wins:27,losses:18,streak:0, points:5440,badge:'PRO'},
-  {rank:6, user:'NeonTrader',    wins:24,losses:16,streak:2, points:4800,badge:'PRO'},
-  {rank:7, user:'QuantumBull',   wins:22,losses:20,streak:1, points:4100,badge:'ROOKIE'},
-  {rank:8, user:'CipherWitch',   wins:19,losses:21,streak:0, points:3500,badge:'ROOKIE'},
-  {rank:9, user:'0xShadow',      wins:17,losses:18,streak:3, points:3100,badge:'ROOKIE'},
-  {rank:10,user:'LiquidDread',   wins:15,losses:22,streak:0, points:2700,badge:'ROOKIE'},
+const LB=[
+  {rank:1,user:'CryptoNinja_X',wins:42,losses:8, streak:7,points:9840,badge:'LEGEND'},
+  {rank:2,user:'BlockMaster99', wins:38,losses:12,streak:5,points:8210,badge:'ELITE'},
+  {rank:3,user:'SatoshiWolf',   wins:35,losses:15,streak:3,points:7350,badge:'ELITE'},
+  {rank:4,user:'DeFi_Phantom',  wins:29,losses:11,streak:4,points:6120,badge:'PRO'},
+  {rank:5,user:'MoonHunter',    wins:27,losses:18,streak:0,points:5440,badge:'PRO'},
+  {rank:6,user:'NeonTrader',    wins:24,losses:16,streak:2,points:4800,badge:'PRO'},
+  {rank:7,user:'QuantumBull',   wins:22,losses:20,streak:1,points:4100,badge:'ROOKIE'},
+  {rank:8,user:'CipherWitch',   wins:19,losses:21,streak:0,points:3500,badge:'ROOKIE'},
+  {rank:9,user:'0xShadow',      wins:17,losses:18,streak:3,points:3100,badge:'ROOKIE'},
+  {rank:10,user:'LiquidDread',  wins:15,losses:22,streak:0,points:2700,badge:'ROOKIE'},
 ];
-
-const PAST_BATTLES = [
-  {id:101,coinA:'SOL',coinB:'ADA', winner:'SOL', votesA:2341,votesB:892, date:'2026-04-18'},
+const PAST=[
+  {id:101,coinA:'SOL', coinB:'ADA', winner:'SOL', votesA:2341,votesB:892, date:'2026-04-18'},
   {id:102,coinA:'DOGE',coinB:'LINK',winner:'DOGE',votesA:1982,votesB:1544,date:'2026-04-17'},
-  {id:103,coinA:'BNB',coinB:'AVAX',winner:'BNB', votesA:1677,votesB:1521,date:'2026-04-16'},
-  {id:104,coinA:'ETH',coinB:'SOL', winner:'ETH', votesA:2103,votesB:1889,date:'2026-04-15'},
+  {id:103,coinA:'BNB', coinB:'AVAX',winner:'BNB', votesA:1677,votesB:1521,date:'2026-04-16'},
+  {id:104,coinA:'ETH', coinB:'SOL', winner:'ETH', votesA:2103,votesB:1889,date:'2026-04-15'},
 ];
 
-/* ── Countdown ───────────────────────────────────────────────────────── */
-function useCountdown(endsAt) {
-  const [rem,setRem] = useState(endsAt - Date.now());
-  useEffect(()=>{const t=setInterval(()=>setRem(endsAt-Date.now()),1000);return()=>clearInterval(t)},[endsAt]);
-  const s=Math.max(0,Math.floor(rem/1000));
+/* ── Countdown ─────────────────────────────────────────────────────────── */
+function useCountdown(endsAt){
+  const [r,setR]=useState(endsAt-Date.now());
+  useEffect(()=>{const t=setInterval(()=>setR(endsAt-Date.now()),1000);return()=>clearInterval(t)},[endsAt]);
+  const s=Math.max(0,Math.floor(r/1000));
   return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor(s%3600/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
 }
 
-/* ── ParticleBurst ───────────────────────────────────────────────────── */
-function ParticleBurst({color,active}) {
-  if (!active) return null;
-  return (
+/* ── ParticleBurst ─────────────────────────────────────────────────────── */
+function ParticleBurst({color,active}){
+  if(!active)return null;
+  return(
     <div style={{position:'absolute',inset:0,pointerEvents:'none',overflow:'hidden'}}>
       {Array.from({length:10}).map((_,i)=>(
-        <div key={i} style={{
-          position:'absolute',left:`${35+Math.random()*30}%`,top:`${40+Math.random()*30}%`,
-          width:4,height:4,borderRadius:'50%',background:color,
-          boxShadow:`0 0 6px ${color}`,
-          animation:`particle-rise ${.7+Math.random()*.5}s ease-out ${i*.04}s forwards`,
-        }}/>
+        <div key={i} style={{position:'absolute',left:`${35+Math.random()*30}%`,top:`${40+Math.random()*30}%`,width:4,height:4,borderRadius:'50%',background:color,boxShadow:`0 0 6px ${color}`,animation:`particle-rise ${.7+Math.random()*.5}s ease-out ${i*.04}s forwards`}}/>
       ))}
     </div>
   );
 }
 
-/* ── Coin Arena Card ─────────────────────────────────────────────────── */
-function CoinArenaCard({symbol,votes,totalVotes,side,onVote,hasVoted,userVote}) {
+/* ── CoinArenaCard ─────────────────────────────────────────────────────── */
+function CoinArenaCard({symbol,votes,totalVotes,side,onVote,hasVoted,userVote}){
   const c=COINS[symbol];
   const pct=totalVotes>0?Math.round(votes/totalVotes*100):50;
   const isMyVote=userVote===symbol;
   const [burst,setBurst]=useState(false);
   function handleVote(){if(hasVoted)return;onVote(symbol);setBurst(true);setTimeout(()=>setBurst(false),1200)}
-  return (
-    <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:20,
-      animation:side==='left'?'slide-left .7s ease':'slide-right .7s ease',position:'relative'}}>
+  return(
+    <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:16,animation:side==='left'?'slide-left .7s ease':'slide-right .7s ease',position:'relative'}}>
       <div style={{position:'relative',display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <div style={{position:'absolute',width:160,height:160,borderRadius:'50%',border:`2px solid ${c.color}`,opacity:.25,animation:'ring-expand 2.8s ease-in-out infinite'}}/>
-        <div style={{
-          width:130,height:130,borderRadius:'50%',
-          background:`radial-gradient(circle, ${c.color}22, transparent 70%)`,
-          border:`2px solid ${c.color}55`,
-          display:'flex',alignItems:'center',justifyContent:'center',
-          fontSize:52,color:c.color,textShadow:`0 0 20px ${c.color},0 0 40px ${c.color}`,
-          animation:'float 3s ease-in-out infinite',
-          boxShadow:`0 0 30px ${c.color}33`,
-          position:'relative',zIndex:1,fontFamily:'var(--font-h)',
-        }}>{c.icon}</div>
+        <div className="coin-orb-ring" style={{position:'absolute',borderRadius:'50%',border:`2px solid ${c.color}`,opacity:.25,animation:'ring-expand 2.8s ease-in-out infinite'}}/>
+        <div className="coin-orb" style={{borderRadius:'50%',background:`radial-gradient(circle,${c.color}22,transparent 70%)`,border:`2px solid ${c.color}55`,display:'flex',alignItems:'center',justifyContent:'center',color:c.color,textShadow:`0 0 20px ${c.color},0 0 40px ${c.color}`,animation:'float 3s ease-in-out infinite',boxShadow:`0 0 30px ${c.color}33`,position:'relative',zIndex:1,fontFamily:'var(--font-h)'}}>
+          <span className="coin-icon-size">{c.icon}</span>
+        </div>
         <ParticleBurst color={c.color} active={burst}/>
       </div>
       <div style={{textAlign:'center'}}>
-        <div style={{fontFamily:'var(--font-h)',fontSize:26,fontWeight:900,color:c.color,textShadow:`0 0 14px ${c.color}`,letterSpacing:'.05em'}}>{symbol}</div>
+        <div className="coin-sym" style={{fontFamily:'var(--font-h)',fontWeight:900,color:c.color,textShadow:`0 0 14px ${c.color}`,letterSpacing:'.05em'}}>{symbol}</div>
         <div style={{fontSize:12,color:'#666',marginTop:2}}>{c.name}</div>
-        <div style={{marginTop:7,display:'flex',gap:8,justifyContent:'center',alignItems:'center'}}>
+        <div style={{marginTop:6,display:'flex',gap:8,justifyContent:'center',alignItems:'center'}}>
           <span style={{fontSize:13,color:'#bbb'}}>${c.price.toLocaleString()}</span>
-          <span style={{fontSize:10,padding:'2px 6px',borderRadius:2,
-            background:c.change>=0?'rgba(57,255,20,.1)':'rgba(255,45,85,.1)',
-            color:c.change>=0?'var(--green)':'var(--red)',
-            border:`1px solid ${c.change>=0?'rgba(57,255,20,.3)':'rgba(255,45,85,.3)'}`}}>
-            {c.change>=0?'▲':'▼'}{Math.abs(c.change)}%
-          </span>
+          <span style={{fontSize:10,padding:'2px 6px',borderRadius:2,background:c.change>=0?'rgba(57,255,20,.1)':'rgba(255,45,85,.1)',color:c.change>=0?'var(--green)':'var(--red)',border:`1px solid ${c.change>=0?'rgba(57,255,20,.3)':'rgba(255,45,85,.3)'}`}}>{c.change>=0?'▲':'▼'}{Math.abs(c.change)}%</span>
         </div>
       </div>
       <div style={{textAlign:'center'}}>
-        <div style={{fontFamily:'var(--font-h)',fontSize:38,fontWeight:900,color:'#fff',letterSpacing:'-.02em'}}>
-          {pct}<span style={{fontSize:18,color:'#666'}}>%</span>
-        </div>
+        <div className="coin-pct" style={{fontFamily:'var(--font-h)',fontWeight:900,color:'#fff',letterSpacing:'-.02em'}}>{pct}<span style={{fontSize:16,color:'#666'}}>%</span></div>
         <div style={{fontSize:11,color:'#555'}}>{votes.toLocaleString()} VOTES</div>
       </div>
-      <button onClick={handleVote} disabled={hasVoted} className="clipped" style={{
-        fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.1em',textTransform:'uppercase',
-        padding:'12px 32px',
-        border:`2px solid ${isMyVote?c.color:hasVoted?'#333':c.color}`,
-        background:isMyVote?c.color:'transparent',
-        color:isMyVote?'#000':hasVoted?'#444':c.color,
-        cursor:hasVoted?'not-allowed':'pointer',
-        transition:'all .3s',
-        boxShadow:isMyVote?`0 0 20px ${c.color}`:'none',
-      }}>{isMyVote?'✓ VOTED':hasVoted?'VOTE CAST':`VOTE ${symbol}`}</button>
+      <button onClick={handleVote} disabled={hasVoted} className="clipped" style={{fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.1em',textTransform:'uppercase',padding:'11px 28px',border:`2px solid ${isMyVote?c.color:hasVoted?'#333':c.color}`,background:isMyVote?c.color:'transparent',color:isMyVote?'#000':hasVoted?'#444':c.color,cursor:hasVoted?'not-allowed':'pointer',transition:'all .3s',boxShadow:isMyVote?`0 0 20px ${c.color}`:'none'}}>{isMyVote?'✓ VOTED':hasVoted?'VOTE CAST':`VOTE ${symbol}`}</button>
     </div>
   );
 }
 
-/* ── Arena Tab ───────────────────────────────────────────────────────── */
-function ArenaTab() {
-  const endsAt = useRef(Date.now()+7200000).current;
-  const [votesA,setVotesA]=useState(1847);
-  const [votesB,setVotesB]=useState(1203);
-  const [userVote,setUserVote]=useState(null);
-  const countdown=useCountdown(endsAt);
-  const total=votesA+votesB;
-  const pctA=total>0?votesA/total*100:50;
-
-  function handleVote(sym){
-    if(userVote)return;
-    setUserVote(sym);
-    if(sym==='BTC')setVotesA(v=>v+1); else setVotesB(v=>v+1);
-  }
-
-  return (
-    <div style={{padding:'40px 0 60px',animation:'slide-up .5s ease'}}>
-      <div style={{textAlign:'center',marginBottom:48}}>
+/* ── Arena ─────────────────────────────────────────────────────────────── */
+function ArenaTab(){
+  const endsAt=useRef(Date.now()+7200000).current;
+  const [vA,setVA]=useState(1847);
+  const [vB,setVB]=useState(1203);
+  const [uv,setUv]=useState(null);
+  const cd=useCountdown(endsAt);
+  const total=vA+vB;
+  const pctA=total>0?vA/total*100:50;
+  function handleVote(s){if(uv)return;setUv(s);if(s==='BTC')setVA(v=>v+1);else setVB(v=>v+1)}
+  return(
+    <div className="page">
+      <div className="arena-header">
         <div style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.3em',color:'var(--cyan)',opacity:.6,marginBottom:10}}>▸ LIVE BATTLE ◂</div>
-        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(34px,5vw,62px)',fontWeight:900,letterSpacing:'.06em',
-          background:'linear-gradient(135deg,var(--cyan) 0%,#fff 50%,var(--red) 100%)',
-          WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',
-          animation:'glitch 4s infinite'}}>BATTLE ARENA</h1>
-        <p style={{fontFamily:'var(--font-m)',fontSize:11,color:'#555',letterSpacing:'.22em',marginTop:8}}>PREDICT • VOTE • CONQUER</p>
+        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(28px,7vw,62px)',fontWeight:900,letterSpacing:'.06em',background:'linear-gradient(135deg,var(--cyan) 0%,#fff 50%,var(--red) 100%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',animation:'glitch 4s infinite'}}>BATTLE ARENA</h1>
+        <p style={{fontFamily:'var(--font-m)',fontSize:'clamp(9px,2.5vw,11px)',color:'#555',letterSpacing:'.2em',marginTop:8}}>PREDICT • VOTE • CONQUER</p>
       </div>
-
-      {/* Main battle */}
-      <div className="card" style={{padding:40,animation:'pulse-glow 3.5s infinite',background:'linear-gradient(135deg,#0a0a12,#0d0d1e)'}}>
-        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:32}}>
+      <div className="card battle-card" style={{animation:'pulse-glow 3.5s infinite'}}>
+        <div className="battle-meta">
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <div style={{width:8,height:8,borderRadius:'50%',background:'var(--red)',boxShadow:'0 0 8px var(--red)',animation:'flicker 2s infinite'}}/>
             <span style={{fontFamily:'var(--font-h)',fontSize:10,color:'var(--red)',letterSpacing:'.15em'}}>LIVE</span>
           </div>
-          <div style={{display:'flex',alignItems:'center',gap:12}}>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:11,color:'#555'}}>ENDS IN</span>
-            <div style={{fontFamily:'var(--font-h)',fontSize:20,fontWeight:700,color:'var(--cyan)',textShadow:'0 0 10px var(--cyan)',background:'rgba(0,245,212,.05)',border:'1px solid rgba(0,245,212,.2)',padding:'6px 16px',letterSpacing:'.1em'}}>{countdown}</div>
+            <div style={{fontFamily:'var(--font-h)',fontSize:'clamp(14px,4vw,20px)',fontWeight:700,color:'var(--cyan)',textShadow:'0 0 10px var(--cyan)',background:'rgba(0,245,212,.05)',border:'1px solid rgba(0,245,212,.2)',padding:'5px 12px',letterSpacing:'.1em'}}>{cd}</div>
           </div>
-          <div style={{fontSize:11,color:'#444'}}>{total.toLocaleString()} TOTAL VOTES</div>
+          <div style={{fontSize:11,color:'#444'}}>{total.toLocaleString()} VOTES</div>
         </div>
-        <div style={{height:1,background:'linear-gradient(90deg,transparent,rgba(0,245,212,.15),transparent)',marginBottom:40}}/>
-        <div style={{display:'flex',alignItems:'center',gap:24}}>
-          <CoinArenaCard symbol="BTC" votes={votesA} totalVotes={total} side="left" onVote={handleVote} hasVoted={!!userVote} userVote={userVote}/>
-          <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:12,minWidth:70}}>
-            <div style={{fontFamily:'var(--font-h)',fontSize:34,fontWeight:900,color:'var(--red)',animation:'vs-pulse 2s ease-in-out infinite'}}>VS</div>
-            <div style={{width:1,height:70,background:'linear-gradient(180deg,transparent,var(--red),transparent)'}}/>
+        <div style={{height:1,background:'linear-gradient(90deg,transparent,rgba(0,245,212,.15),transparent)',marginBottom:32}}/>
+        <div className="coins-row">
+          <CoinArenaCard symbol="BTC" votes={vA} totalVotes={total} side="left"  onVote={handleVote} hasVoted={!!uv} userVote={uv}/>
+          <div className="vs-col">
+            <div style={{fontFamily:'var(--font-h)',fontSize:'clamp(24px,5vw,34px)',fontWeight:900,color:'var(--red)',animation:'vs-pulse 2s ease-in-out infinite'}}>VS</div>
+            <div className="vs-line"/>
             <div style={{fontFamily:'var(--font-m)',fontSize:9,color:'#333',textAlign:'center',letterSpacing:'.1em'}}>ROUND<br/>01</div>
           </div>
-          <CoinArenaCard symbol="ETH" votes={votesB} totalVotes={total} side="right" onVote={handleVote} hasVoted={!!userVote} userVote={userVote}/>
+          <CoinArenaCard symbol="ETH" votes={vB} totalVotes={total} side="right" onVote={handleVote} hasVoted={!!uv} userVote={uv}/>
         </div>
-        <div style={{height:1,background:'linear-gradient(90deg,transparent,rgba(0,245,212,.15),transparent)',margin:'40px 0 22px'}}/>
-        {/* Vote bar */}
+        <div style={{height:1,background:'linear-gradient(90deg,transparent,rgba(0,245,212,.15),transparent)',margin:'32px 0 20px'}}/>
         <div>
-          <div style={{display:'flex',justifyContent:'space-between',marginBottom:8}}>
+          <div style={{display:'flex',justifyContent:'space-between',marginBottom:7}}>
             <span style={{fontFamily:'var(--font-h)',fontSize:10,color:COINS.BTC.color}}>BTC {Math.round(pctA)}%</span>
             <span style={{fontFamily:'var(--font-h)',fontSize:10,color:COINS.ETH.color}}>{Math.round(100-pctA)}% ETH</span>
           </div>
-          <div style={{height:8,background:'#111',display:'flex',border:'1px solid rgba(255,255,255,0.05)',overflow:'hidden'}}>
+          <div style={{height:8,background:'#111',display:'flex',border:'1px solid rgba(255,255,255,.05)',overflow:'hidden'}}>
             <div style={{width:`${pctA}%`,background:`linear-gradient(90deg,${COINS.BTC.color},${COINS.BTC.color}88)`,boxShadow:`0 0 10px ${COINS.BTC.color}`,transition:'width .9s cubic-bezier(.34,1.56,.64,1)'}}/>
             <div style={{flex:1,background:`linear-gradient(90deg,${COINS.ETH.color}88,${COINS.ETH.color})`,boxShadow:`0 0 10px ${COINS.ETH.color}`}}/>
           </div>
         </div>
-        {userVote && (
-          <div style={{marginTop:22,textAlign:'center',padding:'13px 20px',background:'rgba(0,245,212,.04)',border:'1px solid rgba(0,245,212,.2)',animation:'scale-in .4s ease'}}>
-            <span style={{fontFamily:'var(--font-h)',fontSize:11,color:'var(--cyan)'}}>✓ VOTE LOCKED — {userVote} · RESULTS AFTER BATTLE ENDS</span>
-          </div>
-        )}
+        {uv&&<div style={{marginTop:20,textAlign:'center',padding:'12px 16px',background:'rgba(0,245,212,.04)',border:'1px solid rgba(0,245,212,.2)',animation:'scale-in .4s ease'}}><span style={{fontFamily:'var(--font-h)',fontSize:'clamp(9px,2.5vw,11px)',color:'var(--cyan)'}}>✓ VOTE LOCKED — {uv} · RESULTS AFTER BATTLE ENDS</span></div>}
       </div>
-
-      {/* Bottom row */}
-      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,marginTop:22}}>
-        <div className="card" style={{padding:24}}>
-          <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,color:'var(--cyan)',marginBottom:18,letterSpacing:'.08em'}}>⚔ LATEST FIGHTS</div>
-          {PAST_BATTLES.map((b,i)=>{
-            const t=b.votesA+b.votesB;
-            return (
-              <div key={b.id} style={{padding:'13px 0',borderBottom:i<PAST_BATTLES.length-1?'1px solid rgba(255,255,255,0.04)':'none',animation:`row-in .4s ease ${i*.07}s both`}}>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
-                  <div style={{display:'flex',alignItems:'center',gap:8}}>
-                    <span style={{color:COINS[b.coinA].color,fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}>{b.coinA}</span>
-                    <span style={{color:'#333',fontSize:10}}>vs</span>
-                    <span style={{color:COINS[b.coinB].color,fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}>{b.coinB}</span>
-                  </div>
-                  <span style={{fontFamily:'var(--font-h)',fontSize:9,padding:'3px 9px',background:`${COINS[b.winner].color}18`,border:`1px solid ${COINS[b.winner].color}44`,color:COINS[b.winner].color}}>{b.winner} WIN</span>
+      <div className="arena-bottom">
+        <div className="card" style={{padding:20}}>
+          <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,color:'var(--cyan)',marginBottom:16,letterSpacing:'.08em'}}>⚔ LATEST FIGHTS</div>
+          {PAST.map((b,i)=>{const t=b.votesA+b.votesB;return(
+            <div key={b.id} style={{padding:'11px 0',borderBottom:i<PAST.length-1?'1px solid rgba(255,255,255,.04)':'none',animation:`row-in .4s ease ${i*.07}s both`}}>
+              <div style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                <div style={{display:'flex',alignItems:'center',gap:8}}>
+                  <span style={{color:COINS[b.coinA].color,fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}>{b.coinA}</span>
+                  <span style={{color:'#333',fontSize:10}}>vs</span>
+                  <span style={{color:COINS[b.coinB].color,fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}>{b.coinB}</span>
                 </div>
-                <div style={{display:'flex',height:3,marginTop:8,overflow:'hidden',gap:2}}>
-                  <div style={{width:`${b.votesA/t*100}%`,background:COINS[b.coinA].color,opacity:.5}}/>
-                  <div style={{flex:1,background:COINS[b.coinB].color,opacity:.5}}/>
-                </div>
-                <div style={{display:'flex',justifyContent:'space-between',marginTop:3}}>
-                  <span style={{fontSize:9,color:'#333'}}>{b.votesA.toLocaleString()}</span>
-                  <span style={{fontSize:9,color:'#333'}}>{b.date}</span>
-                  <span style={{fontSize:9,color:'#333'}}>{b.votesB.toLocaleString()}</span>
-                </div>
+                <span style={{fontFamily:'var(--font-h)',fontSize:9,padding:'3px 8px',background:`${COINS[b.winner].color}18`,border:`1px solid ${COINS[b.winner].color}44`,color:COINS[b.winner].color}}>{b.winner} WIN</span>
               </div>
-            );
-          })}
+              <div style={{display:'flex',height:3,marginTop:7,overflow:'hidden'}}>
+                <div style={{width:`${b.votesA/t*100}%`,background:COINS[b.coinA].color,opacity:.5}}/><div style={{flex:1,background:COINS[b.coinB].color,opacity:.5}}/>
+              </div>
+              <div style={{display:'flex',justifyContent:'space-between',marginTop:3}}>
+                <span style={{fontSize:9,color:'#333'}}>{b.votesA.toLocaleString()}</span><span style={{fontSize:9,color:'#333'}}>{b.date}</span><span style={{fontSize:9,color:'#333'}}>{b.votesB.toLocaleString()}</span>
+              </div>
+            </div>
+          );})}
         </div>
-        <div className="card" style={{padding:24}}>
-          <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,color:'var(--gold)',marginBottom:18,letterSpacing:'.08em'}}>🏆 TOP FIGHTERS</div>
-          {LEADERBOARD_DATA.slice(0,5).map((p,i)=>(
-            <div key={p.user} style={{display:'flex',alignItems:'center',gap:12,padding:'9px 0',borderBottom:i<4?'1px solid rgba(255,255,255,0.04)':'none',animation:`row-in .4s ease ${i*.07}s both`}}>
-              <div style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:900,width:22,textAlign:'center',
-                color:i===0?'var(--gold)':i===1?'#aaa':i===2?'#c84b11':'#444',
-                textShadow:i===0?'0 0 10px var(--gold)':'none'}}>
-                {i===0?'👑':p.rank}
-              </div>
-              <div style={{flex:1}}>
-                <div style={{fontSize:13,color:i===0?'var(--gold)':'#ccc'}}>{p.user}</div>
-                <div style={{fontSize:10,color:'#3a3a4a',marginTop:2}}>{p.wins}W · {p.losses}L{p.streak>0?` · 🔥${p.streak}`:''}</div>
-              </div>
+        <div className="card" style={{padding:20}}>
+          <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,color:'var(--gold)',marginBottom:16,letterSpacing:'.08em'}}>🏆 TOP FIGHTERS</div>
+          {LB.slice(0,5).map((p,i)=>(
+            <div key={p.user} style={{display:'flex',alignItems:'center',gap:10,padding:'8px 0',borderBottom:i<4?'1px solid rgba(255,255,255,.04)':'none',animation:`row-in .4s ease ${i*.07}s both`}}>
+              <div style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:900,width:20,textAlign:'center',color:i===0?'var(--gold)':i===1?'#aaa':i===2?'#c84b11':'#444',textShadow:i===0?'0 0 10px var(--gold)':'none'}}>{i===0?'👑':p.rank}</div>
+              <div style={{flex:1}}><div style={{fontSize:13,color:i===0?'var(--gold)':'#ccc'}}>{p.user}</div><div style={{fontSize:10,color:'#3a3a4a',marginTop:2}}>{p.wins}W · {p.losses}L{p.streak>0?` · 🔥${p.streak}`:''}</div></div>
               <div style={{fontFamily:'var(--font-h)',fontSize:12,color:'var(--cyan)',textShadow:'0 0 8px var(--cyan)'}}>{p.points.toLocaleString()}</div>
             </div>
           ))}
@@ -296,77 +360,70 @@ function ArenaTab() {
   );
 }
 
-/* ── Leaderboard Tab ─────────────────────────────────────────────────── */
-function LeaderboardTab() {
+/* ── Leaderboard ───────────────────────────────────────────────────────── */
+function LeaderboardTab(){
   const [filter,setFilter]=useState('ALL');
   const badges={LEGEND:'var(--gold)',ELITE:'var(--cyan)',PRO:'var(--purple)',ROOKIE:'#666'};
-  const filtered=filter==='ALL'?LEADERBOARD_DATA:LEADERBOARD_DATA.filter(p=>p.badge===filter);
-  return (
-    <div style={{padding:'40px 0 60px',animation:'slide-up .5s ease'}}>
-      <div style={{textAlign:'center',marginBottom:40}}>
+  const filtered=filter==='ALL'?LB:LB.filter(p=>p.badge===filter);
+  const stats=[{label:'ACTIVE WARRIORS',val:'1,847',color:'var(--cyan)'},{label:'BATTLES TODAY',val:'3',color:'var(--red)'},{label:'VOTES CAST',val:'24.8K',color:'var(--gold)'},{label:'PRIZE POOL',val:'∞ REP',color:'var(--purple)'}];
+  return(
+    <div className="page">
+      <div style={{textAlign:'center',marginBottom:32}}>
         <div style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.3em',color:'var(--gold)',opacity:.6,marginBottom:10}}>▸ HALL OF GLORY ◂</div>
-        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(30px,4vw,54px)',fontWeight:900,letterSpacing:'.06em',
-          background:'linear-gradient(135deg,var(--gold) 0%,#fff 60%)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}>LEADERBOARD</h1>
+        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(26px,6vw,54px)',fontWeight:900,letterSpacing:'.06em',background:'linear-gradient(90deg,var(--gold),#fff,var(--gold))',backgroundSize:'200% auto',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',animation:'neon-sweep 4s linear infinite'}}>LEADERBOARD</h1>
       </div>
-      {/* Podium */}
-      <div style={{display:'flex',gap:16,justifyContent:'center',marginBottom:40,alignItems:'flex-end'}}>
+      <div className="lb-stats">
+        {stats.map((s,i)=>(
+          <div key={s.label} style={{padding:'12px 16px',borderRight:i<3?'1px solid rgba(255,255,255,.06)':'none',background:'rgba(255,255,255,.015)',animation:`slide-up .5s ease ${i*.08}s both`}}>
+            <div className="lb-stat-label" style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.12em',color:'#444',marginBottom:4}}>{s.label}</div>
+            <div className="lb-stat-val" style={{fontFamily:'var(--font-h)',fontSize:18,fontWeight:900,color:s.color,textShadow:`0 0 10px ${s.color}`}}>{s.val}</div>
+          </div>
+        ))}
+      </div>
+      <div className="lb-podium">
         {[1,0,2].map(idx=>{
-          const p=LEADERBOARD_DATA[idx];
-          const hs=[130,170,100];
-          const h=hs[idx===0?1:idx===1?0:2];
-          const cols=['var(--gold)','var(--cyan)','var(--purple)'];
-          const col=cols[idx===0?0:idx===1?1:2];
-          return (
-            <div key={p.user} style={{flex:1,maxWidth:210,display:'flex',flexDirection:'column',alignItems:'center',animation:`slide-up .6s ease ${idx*.1}s both`}}>
-              {idx===0&&<div style={{fontSize:26,marginBottom:6}}>👑</div>}
+          const p=LB[idx];const hs=[130,170,100];const h=hs[idx===0?1:idx===1?0:2];
+          const cols=['var(--gold)','var(--cyan)','var(--purple)'];const col=cols[idx===0?0:idx===1?1:2];
+          return(
+            <div key={p.user} style={{flex:1,maxWidth:210,display:'flex',flexDirection:'column',alignItems:'center',animation:`slide-up .6s ease ${idx*.12}s both`}}>
+              {idx===0&&<div style={{fontSize:26,marginBottom:6,animation:'podium-float 2.5s ease-in-out infinite'}}>👑</div>}
               <div style={{fontSize:11,color:'#666',marginBottom:4,textAlign:'center',fontFamily:'var(--font-m)'}}>{p.user}</div>
-              <div style={{fontFamily:'var(--font-h)',fontSize:18,fontWeight:900,color:col,textShadow:`0 0 12px ${col}`,marginBottom:8}}>{p.points.toLocaleString()} <span style={{fontSize:10}}>PTS</span></div>
-              <div style={{width:'100%',height:h,background:`linear-gradient(180deg,${col}28,${col}08)`,border:`1px solid ${col}44`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:30}}>
+              <div style={{fontFamily:'var(--font-h)',fontSize:18,fontWeight:900,color:col,textShadow:`0 0 14px ${col}`,marginBottom:8,animation:idx===0?'podium-float 3s ease-in-out infinite':'none'}}>{p.points.toLocaleString()} <span style={{fontSize:10}}>PTS</span></div>
+              <div className="corner-box" style={{width:'100%',height:h,background:`linear-gradient(180deg,${col}28,${col}06)`,border:`1px solid ${col}44`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:32,position:'relative',overflow:'hidden'}}>
+                <div style={{position:'absolute',inset:0,background:`linear-gradient(180deg,${col}08,transparent)`,animation:'data-stream 4s linear infinite'}}/>
                 {idx===0?'🥇':idx===1?'🥈':'🥉'}
               </div>
             </div>
           );
         })}
       </div>
-      {/* Filter */}
-      <div style={{display:'flex',gap:8,marginBottom:20,flexWrap:'wrap'}}>
+      <div className="lb-filters">
         {['ALL','LEGEND','ELITE','PRO','ROOKIE'].map(f=>(
-          <button key={f} onClick={()=>setFilter(f)} className="clipped-sm" style={{
-            fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.1em',padding:'7px 16px',
-            border:`1px solid ${filter===f?(badges[f]||'var(--cyan)'):'rgba(255,255,255,.08)'}`,
-            background:filter===f?`${badges[f]||'var(--cyan)'}18`:'transparent',
-            color:filter===f?(badges[f]||'var(--cyan)'):'#444',cursor:'pointer',transition:'all .2s',
-          }}>{f}</button>
+          <button key={f} onClick={()=>setFilter(f)} className="clipped-sm" style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.1em',padding:'7px 14px',border:`1px solid ${filter===f?(badges[f]||'var(--cyan)'):'rgba(255,255,255,.08)'}`,background:filter===f?`${badges[f]||'var(--cyan)'}18`:'transparent',color:filter===f?(badges[f]||'var(--cyan)'):'#444',cursor:'pointer',transition:'all .2s'}}>{f}</button>
         ))}
       </div>
-      <div className="card">
-        <div style={{overflowX:'auto'}}>
+      <div className="card scan-hover table-wrap" style={{animation:'cyber-border 4s ease-in-out infinite'}}>
+        <div className="table-wrap">
           <table style={{width:'100%',borderCollapse:'collapse'}}>
             <thead>
               <tr style={{borderBottom:'1px solid rgba(0,245,212,.12)'}}>
                 {['RANK','FIGHTER','WINS','LOSSES','STREAK','BADGE','POINTS'].map(h=>(
-                  <th key={h} style={{padding:'13px 20px',textAlign:'left',fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.15em',color:'var(--cyan)',opacity:.6}}>{h}</th>
+                  <th key={h} style={{padding:'12px 14px',textAlign:'left',fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.13em',color:'var(--cyan)',opacity:.6,whiteSpace:'nowrap'}}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {filtered.map((p,i)=>(
-                <tr key={p.user} style={{borderBottom:'1px solid rgba(255,255,255,0.03)',transition:'background .2s',animation:`row-in .4s ease ${i*.05}s both`}}
-                  onMouseEnter={e=>e.currentTarget.style.background='rgba(0,245,212,0.025)'}
-                  onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
-                  <td style={{padding:'15px 20px'}}>
-                    <span style={{fontFamily:'var(--font-h)',fontSize:15,fontWeight:900,color:p.rank===1?'var(--gold)':p.rank===2?'#aaa':p.rank===3?'#c84b11':'#3a3a4a',textShadow:p.rank<=3?`0 0 8px ${p.rank===1?'var(--gold)':p.rank===2?'#aaa':'#c84b11'}`:'none'}}>#{p.rank}</span>
-                  </td>
-                  <td style={{padding:'15px 20px',fontFamily:'var(--font-m)',fontSize:13,color:p.rank<=3?'#fff':'#bbb'}}>
-                    {p.rank===1&&<span style={{marginRight:8}}>👑</span>}{p.user}
-                  </td>
-                  <td style={{padding:'15px 20px',color:'var(--green)',fontSize:13}}>{p.wins}</td>
-                  <td style={{padding:'15px 20px',color:'var(--red)',fontSize:13}}>{p.losses}</td>
-                  <td style={{padding:'15px 20px',color:p.streak>0?'#ff8c00':'#333',fontSize:13}}>{p.streak>0?`🔥 ${p.streak}`:'—'}</td>
-                  <td style={{padding:'15px 20px'}}>
-                    <span style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.12em',padding:'4px 10px',background:`${badges[p.badge]}18`,border:`1px solid ${badges[p.badge]}44`,color:badges[p.badge]}}>{p.badge}</span>
-                  </td>
-                  <td style={{padding:'15px 20px',fontFamily:'var(--font-h)',fontSize:14,fontWeight:700,color:'var(--cyan)',textShadow:'0 0 8px var(--cyan)'}}>{p.points.toLocaleString()}</td>
+                <tr key={p.user} className="glow-row" style={{borderBottom:'1px solid rgba(255,255,255,.03)',transition:'all .25s',animation:`rank-slide .45s cubic-bezier(.22,1,.36,1) ${i*.06}s both`}}
+                  onMouseEnter={e=>{e.currentTarget.style.background='rgba(0,245,212,.04)';e.currentTarget.style.transform='translateX(4px)'}}
+                  onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.transform='none'}}>
+                  <td style={{padding:'13px 14px'}}><span style={{fontFamily:'var(--font-h)',fontSize:14,fontWeight:900,color:p.rank===1?'var(--gold)':p.rank===2?'#aaa':p.rank===3?'#c84b11':'#3a3a4a',textShadow:p.rank<=3?`0 0 8px ${p.rank===1?'var(--gold)':p.rank===2?'#aaa':'#c84b11'}`:'none'}}>#{p.rank}</span></td>
+                  <td style={{padding:'13px 14px',fontFamily:'var(--font-m)',fontSize:13,color:p.rank<=3?'#fff':'#bbb',whiteSpace:'nowrap'}}>{p.rank===1&&<span style={{marginRight:6}}>👑</span>}{p.user}</td>
+                  <td style={{padding:'13px 14px',color:'var(--green)',fontSize:13}}>{p.wins}</td>
+                  <td style={{padding:'13px 14px',color:'var(--red)',fontSize:13}}>{p.losses}</td>
+                  <td style={{padding:'13px 14px',color:p.streak>0?'#ff8c00':'#333',fontSize:13,whiteSpace:'nowrap'}}>{p.streak>0?`🔥 ${p.streak}`:'—'}</td>
+                  <td className="lb-badge-col" style={{padding:'13px 14px'}}><span style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.1em',padding:'4px 8px',background:`${badges[p.badge]}18`,border:`1px solid ${badges[p.badge]}44`,color:badges[p.badge],whiteSpace:'nowrap'}}>{p.badge}</span></td>
+                  <td style={{padding:'13px 14px',fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,color:'var(--cyan)',textShadow:'0 0 8px var(--cyan)',whiteSpace:'nowrap'}}>{p.points.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -377,402 +434,213 @@ function LeaderboardTab() {
   );
 }
 
-/* ── Profile Tab ─────────────────────────────────────────────────────── */
-function ProfileTab({connected,setTab}) {
-  const [telegramLinked,setTelegramLinked]=useState(false);
+/* ── Profile ───────────────────────────────────────────────────────────── */
+function ProfileTab({connected,setTab}){
+  const [tgLinked,setTgLinked]=useState(false);
   const [linking,setLinking]=useState(false);
-
-  // Mock: connected user has no battles yet (fresh state as per reference)
   const stats={wins:0,losses:0,totalVotes:0,winRate:'0%'};
-
-  function handleLinkTelegram(){
-    setLinking(true);
-    setTimeout(()=>{setLinking(false);setTelegramLinked(true)},1500);
-  }
-
-  if(!connected) return (
-    <div style={{padding:'80px 0',textAlign:'center',animation:'slide-up .5s ease'}}>
-      <div style={{fontSize:52,marginBottom:20}}>🔒</div>
-      <div style={{fontFamily:'var(--font-h)',fontSize:18,color:'var(--cyan)',marginBottom:12}}>CONNECT WALLET TO VIEW PROFILE</div>
-      <div style={{fontFamily:'var(--font-m)',fontSize:12,color:'#444',marginBottom:30}}>Your battle history and stats await</div>
+  function linkTg(){setLinking(true);setTimeout(()=>{setLinking(false);setTgLinked(true)},1500)}
+  if(!connected)return(
+    <div className="page" style={{textAlign:'center',padding:'80px 24px'}}>
+      <div style={{fontSize:48,marginBottom:20}}>🔒</div>
+      <div style={{fontFamily:'var(--font-h)',fontSize:'clamp(14px,4vw,18px)',color:'var(--cyan)',marginBottom:12}}>CONNECT WALLET TO VIEW PROFILE</div>
+      <div style={{fontFamily:'var(--font-m)',fontSize:12,color:'#444'}}>Your battle history and stats await</div>
     </div>
   );
-
-  return (
-    <div style={{padding:'40px 0 60px',animation:'slide-up .5s ease',maxWidth:700,margin:'0 auto'}}>
-
-      {/* Avatar + heading */}
-      <div style={{textAlign:'center',marginBottom:36}}>
-        <div style={{
-          width:80,height:80,borderRadius:'50%',
-          border:'2px solid var(--cyan)',
-          background:'rgba(0,245,212,0.06)',
-          display:'flex',alignItems:'center',justifyContent:'center',
-          margin:'0 auto 18px',
-          boxShadow:'0 0 20px rgba(0,245,212,0.2)',
-        }}>
-          {/* Person icon SVG */}
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="13" r="7" stroke="#00f5d4" strokeWidth="2"/>
-            <path d="M4 32c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#00f5d4" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </div>
-        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(22px,3vw,36px)',fontWeight:900,letterSpacing:'.06em',color:'#fff',marginBottom:10}}>
-          WARRIOR PROFILE
-        </h1>
-        <div style={{fontFamily:'var(--font-m)',fontSize:11,color:'#3a5a52',marginBottom:20,wordBreak:'break-all'}}>
-          plxfd-7owlc-xwjkv-mro5e-usydf-lqnhy-7pruh-o5jao-ja4yq-w6wjq-yae
-        </div>
-
-        {/* Super Admin badge */}
-        <div style={{display:'inline-block',marginBottom:16}}>
-          <div className="clipped" style={{
-            fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.12em',
-            padding:'8px 28px',
-            border:'1px solid var(--gold)',
-            background:'rgba(245,197,24,0.08)',
-            color:'var(--gold)',
-            textShadow:'0 0 10px var(--gold)',
-            boxShadow:'0 0 16px rgba(245,197,24,0.15)',
-          }}>SUPER ADMIN</div>
-        </div>
-
-        {/* Enter admin panel */}
-        <div style={{marginBottom:28}}>
-          <button onClick={()=>setTab('ADMIN')} className="clipped" style={{
-            fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,letterSpacing:'.1em',
-            padding:'13px 40px',
-            border:'1px solid var(--gold)',
-            background:'rgba(245,197,24,0.06)',
-            color:'var(--gold)',
-            cursor:'pointer',transition:'all .25s',
-            display:'inline-flex',alignItems:'center',gap:10,
-          }}
-          onMouseEnter={e=>{e.currentTarget.style.background='rgba(245,197,24,0.14)';e.currentTarget.style.boxShadow='0 0 20px rgba(245,197,24,0.25)'}}
-          onMouseLeave={e=>{e.currentTarget.style.background='rgba(245,197,24,0.06)';e.currentTarget.style.boxShadow='none'}}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <circle cx="7" cy="7" r="6" stroke="#f5c518" strokeWidth="1.5"/>
-              <circle cx="7" cy="7" r="2.5" stroke="#f5c518" strokeWidth="1.5"/>
-            </svg>
-            ENTER ADMIN PANEL
-          </button>
-        </div>
-
-        {/* Link Telegram */}
-        <div style={{textAlign:'left',maxWidth:400,margin:'0 auto'}}>
-          <div style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.2em',color:'#3a5a52',marginBottom:10}}>LINK TELEGRAM</div>
-          <button onClick={handleLinkTelegram} disabled={telegramLinked} style={{
-            width:'100%',fontFamily:'var(--font-h)',fontSize:12,fontWeight:700,letterSpacing:'.1em',
-            padding:'14px',
-            border:`1px solid ${telegramLinked?'rgba(57,255,20,.3)':'var(--cyan)'}`,
-            background:telegramLinked?'rgba(57,255,20,0.08)':'rgba(0,245,212,0.05)',
-            color:telegramLinked?'var(--green)':'var(--cyan)',
-            cursor:telegramLinked?'default':'pointer',
-            transition:'all .25s',
-            display:'flex',alignItems:'center',justifyContent:'center',gap:10,
-            borderRadius:2,
-          }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M14.5 1.5L1 6.5l4.5 1.5 2 5 2-3 4 3 1-11.5z" stroke={telegramLinked?'#39ff14':'#00f5d4'} strokeWidth="1.2" strokeLinejoin="round"/>
-            </svg>
-            {linking?'LINKING…':telegramLinked?'✓ TELEGRAM LINKED':'LINK TELEGRAM'}
-          </button>
-          <div style={{fontFamily:'var(--font-m)',fontSize:10,color:'#2a3a35',marginTop:6}}>
-            Link your Telegram to appear on the leaderboard.
-          </div>
-        </div>
-      </div>
-
-      {/* Stat cards */}
-      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:32}}>
-        {[
-          {label:'WINS',      value:stats.wins,     color:'var(--green)',  borderColor:'rgba(57,255,20,.35)',
-            icon:<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 7H24l-6 4.5 2.5 7L14 18l-6.5 4.5 2.5-7L4 11h7.5L14 4z" stroke="#39ff14" strokeWidth="1.5" strokeLinejoin="round"/></svg>},
-          {label:'LOSSES',    value:stats.losses,   color:'var(--red)',    borderColor:'rgba(255,45,85,.35)',
-            icon:<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 7l14 14M21 7L7 21" stroke="#ff2d55" strokeWidth="2" strokeLinecap="round"/></svg>},
-          {label:'TOTAL VOTES',value:stats.totalVotes,color:'var(--cyan)', borderColor:'rgba(0,245,212,.35)',
-            icon:<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#00f5d4" strokeWidth="1.5"/><circle cx="14" cy="14" r="4" stroke="#00f5d4" strokeWidth="1.5"/></svg>},
-          {label:'WIN RATE',  value:stats.winRate,  color:'var(--gold)',   borderColor:'rgba(245,197,24,.35)',
-            icon:<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M10 4h8v6l3 2-3 2v4h-8v-4l-3-2 3-2V4z" stroke="#f5c518" strokeWidth="1.5" strokeLinejoin="round"/></svg>},
-        ].map(s=>(
-          <div key={s.label} style={{
-            background:'rgba(255,255,255,0.02)',
-            border:`1px solid ${s.borderColor}`,
-            borderRadius:3,padding:'24px 16px',textAlign:'center',
-            transition:'border-color .2s,box-shadow .2s',
-          }}
-          onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 0 16px ${s.borderColor}`;}}
-          onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';}}>
-            <div style={{display:'flex',justifyContent:'center',marginBottom:10}}>{s.icon}</div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:26,fontWeight:900,color:s.color,textShadow:`0 0 12px ${s.color}`}}>
-              {typeof s.value==='number'?s.value.toLocaleString():s.value}
+  return(
+    <div className="page">
+      <div style={{maxWidth:680,margin:'0 auto',padding:'0 4px'}}>
+        <div style={{textAlign:'center',marginBottom:32}}>
+          <div style={{position:'relative',width:80,height:80,margin:'0 auto 18px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div style={{position:'absolute',width:110,height:110,borderRadius:'50%',border:'1px solid rgba(0,245,212,.2)',animation:'avatar-ring 2.5s ease-out infinite'}}/>
+            <div style={{position:'absolute',width:95,height:95,borderRadius:'50%',border:'1px solid rgba(0,245,212,.15)',animation:'avatar-ring 2.5s ease-out .6s infinite'}}/>
+            <div style={{width:80,height:80,borderRadius:'50%',border:'2px solid var(--cyan)',background:'rgba(0,245,212,.06)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 0 24px rgba(0,245,212,.3)',animation:'pulse-glow 3s infinite'}}>
+              <svg width="34" height="34" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="13" r="7" stroke="#00f5d4" strokeWidth="2"/><path d="M4 32c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#00f5d4" strokeWidth="2" strokeLinecap="round"/></svg>
             </div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.18em',color:'#333',marginTop:6}}>{s.label}</div>
           </div>
-        ))}
-      </div>
-
-      {/* Battle history */}
-      <div>
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M8 2v4l2.5 2.5" stroke="#00f5d4" strokeWidth="1.5" strokeLinecap="round"/>
-            <circle cx="8" cy="8" r="6" stroke="#00f5d4" strokeWidth="1.5"/>
-          </svg>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BATTLE HISTORY</span>
+          <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(18px,5vw,34px)',fontWeight:900,letterSpacing:'.06em',color:'#fff',marginBottom:10}}>WARRIOR PROFILE</h1>
+          <div className="profile-addr" style={{fontFamily:'var(--font-m)',fontSize:11,color:'#3a5a52',marginBottom:20,wordBreak:'break-all',padding:'0 8px'}}>plxfd-7owlc-xwjkv-mro5e-usydf-lqnhy-7pruh-o5jao-ja4yq-w6wjq-yae</div>
+          <div style={{display:'inline-block',marginBottom:14}}>
+            <div className="clipped" style={{fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.12em',padding:'8px 28px',border:'1px solid var(--gold)',background:'rgba(245,197,24,.08)',color:'var(--gold)',textShadow:'0 0 10px var(--gold)',boxShadow:'0 0 16px rgba(245,197,24,.15)'}}>SUPER ADMIN</div>
+          </div>
+          <div style={{marginBottom:24}}>
+            <button onClick={()=>setTab('ADMIN')} className="clipped" style={{fontFamily:'var(--font-h)',fontSize:'clamp(10px,2.5vw,12px)',fontWeight:700,letterSpacing:'.1em',padding:'12px 32px',border:'1px solid var(--gold)',background:'rgba(245,197,24,.06)',color:'var(--gold)',cursor:'pointer',transition:'all .25s',display:'inline-flex',alignItems:'center',gap:10}}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(245,197,24,.14)';e.currentTarget.style.boxShadow='0 0 20px rgba(245,197,24,.25)'}}
+              onMouseLeave={e=>{e.currentTarget.style.background='rgba(245,197,24,.06)';e.currentTarget.style.boxShadow='none'}}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#f5c518" strokeWidth="1.5"/><circle cx="7" cy="7" r="2.5" stroke="#f5c518" strokeWidth="1.5"/></svg>
+              ENTER ADMIN PANEL
+            </button>
+          </div>
+          <div style={{textAlign:'left',maxWidth:400,margin:'0 auto'}}>
+            <div style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.2em',color:'#3a5a52',marginBottom:10}}>LINK TELEGRAM</div>
+            <button onClick={linkTg} disabled={tgLinked} style={{width:'100%',fontFamily:'var(--font-h)',fontSize:'clamp(10px,3vw,12px)',fontWeight:700,letterSpacing:'.1em',padding:'13px',border:`1px solid ${tgLinked?'rgba(57,255,20,.3)':'var(--cyan)'}`,background:tgLinked?'rgba(57,255,20,.08)':'rgba(0,245,212,.05)',color:tgLinked?'var(--green)':'var(--cyan)',cursor:tgLinked?'default':'pointer',transition:'all .25s',display:'flex',alignItems:'center',justifyContent:'center',gap:10,borderRadius:2}}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14.5 1.5L1 6.5l4.5 1.5 2 5 2-3 4 3 1-11.5z" stroke={tgLinked?'#39ff14':'#00f5d4'} strokeWidth="1.2" strokeLinejoin="round"/></svg>
+              {linking?'LINKING…':tgLinked?'✓ TELEGRAM LINKED':'LINK TELEGRAM'}
+            </button>
+            <div style={{fontFamily:'var(--font-m)',fontSize:10,color:'#2a3a35',marginTop:6}}>Link your Telegram to appear on the leaderboard.</div>
+          </div>
         </div>
-        <div style={{
-          background:'rgba(255,255,255,0.02)',border:'1px solid rgba(255,255,255,0.06)',
-          borderRadius:3,padding:'60px 20px',textAlign:'center',
-        }}>
-          <div style={{marginBottom:16}}>
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style={{opacity:.3}}>
-              <path d="M10 10l20 20M30 10L10 30" stroke="#ccc" strokeWidth="2.5" strokeLinecap="round"/>
-            </svg>
+        <div className="profile-stats">
+          {[
+            {label:'WINS',value:stats.wins,color:'var(--green)',bc:'rgba(57,255,20,.35)',icon:<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 4l2.5 7H24l-6 4.5 2.5 7L14 18l-6.5 4.5 2.5-7L4 11h7.5L14 4z" stroke="#39ff14" strokeWidth="1.5" strokeLinejoin="round"/></svg>},
+            {label:'LOSSES',value:stats.losses,color:'var(--red)',bc:'rgba(255,45,85,.35)',icon:<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M7 7l14 14M21 7L7 21" stroke="#ff2d55" strokeWidth="2" strokeLinecap="round"/></svg>},
+            {label:'TOTAL VOTES',value:stats.totalVotes,color:'var(--cyan)',bc:'rgba(0,245,212,.35)',icon:<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#00f5d4" strokeWidth="1.5"/><circle cx="14" cy="14" r="4" stroke="#00f5d4" strokeWidth="1.5"/></svg>},
+            {label:'WIN RATE',value:stats.winRate,color:'var(--gold)',bc:'rgba(245,197,24,.35)',icon:<svg width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M10 4h8v6l3 2-3 2v4h-8v-4l-3-2 3-2V4z" stroke="#f5c518" strokeWidth="1.5" strokeLinejoin="round"/></svg>},
+          ].map((s,i)=>(
+            <div key={s.label} className="corner-box scan-hover" style={{background:'rgba(255,255,255,.02)',border:`1px solid ${s.bc}`,borderRadius:3,padding:'20px 12px',textAlign:'center',transition:'all .3s',animation:`stat-pop .6s cubic-bezier(.22,1,.36,1) ${i*.1}s both`}}
+              onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px)';e.currentTarget.style.boxShadow=`0 8px 24px ${s.bc}`}}
+              onMouseLeave={e=>{e.currentTarget.style.transform='none';e.currentTarget.style.boxShadow='none'}}>
+              <div style={{display:'flex',justifyContent:'center',marginBottom:8}}>{s.icon}</div>
+              <div style={{fontFamily:'var(--font-h)',fontSize:'clamp(20px,5vw,26px)',fontWeight:900,color:s.color,textShadow:`0 0 14px ${s.color}`}}>{typeof s.value==='number'?s.value.toLocaleString():s.value}</div>
+              <div style={{fontFamily:'var(--font-h)',fontSize:'clamp(7px,1.8vw,8px)',letterSpacing:'.15em',color:'#333',marginTop:5}}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14}}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4l2.5 2.5" stroke="#00f5d4" strokeWidth="1.5" strokeLinecap="round"/><circle cx="8" cy="8" r="6" stroke="#00f5d4" strokeWidth="1.5"/></svg>
+            <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BATTLE HISTORY</span>
           </div>
-          <div style={{fontFamily:'var(--font-h)',fontSize:12,letterSpacing:'.15em',color:'#2a3a35',marginBottom:6}}>NO BATTLES FOUGHT YET</div>
-          <div style={{fontFamily:'var(--font-m)',fontSize:11,color:'#1e2e2a'}}>Go to the Arena and cast your first vote!</div>
+          <div style={{background:'rgba(255,255,255,.02)',border:'1px solid rgba(255,255,255,.06)',borderRadius:3,padding:'50px 20px',textAlign:'center'}}>
+            <div style={{marginBottom:14}}><svg width="36" height="36" viewBox="0 0 40 40" fill="none" style={{opacity:.3}}><path d="M10 10l20 20M30 10L10 30" stroke="#ccc" strokeWidth="2.5" strokeLinecap="round"/></svg></div>
+            <div style={{fontFamily:'var(--font-h)',fontSize:11,letterSpacing:'.15em',color:'#2a3a35',marginBottom:6}}>NO BATTLES FOUGHT YET</div>
+            <div style={{fontFamily:'var(--font-m)',fontSize:11,color:'#1e2e2a'}}>Go to the Arena and cast your first vote!</div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-/* ── Admin Tab ───────────────────────────────────────────────────────── */
-function AdminTab() {
-  const coinSymbols=Object.keys(COINS);
+/* ── Admin ─────────────────────────────────────────────────────────────── */
+function AdminTab(){
+  const syms=Object.keys(COINS);
   const [form,setForm]=useState({coin1:'BTC',coin2:'ETH',duration:'1 Hour'});
-  const [warriors]=useState([]);
   const [battles,setBattles]=useState([
     {id:1,coin1:'BTC',coin2:'ETH',status:'live',votes:3050,created:'2026-04-19'},
-    ...PAST_BATTLES.slice(0,3).map(b=>({...b,coin1:b.coinA,coin2:b.coinB,status:'ended',votes:b.votesA+b.votesB,created:b.date})),
+    ...PAST.slice(0,3).map(b=>({...b,coin1:b.coinA,coin2:b.coinB,status:'ended',votes:b.votesA+b.votesB,created:b.date})),
   ]);
-  const [banInput,setBanInput]=useState('');
-  const [addAdmin,setAddAdmin]=useState('');
-  const [removeAdmin,setRemoveAdmin]=useState('');
+  const [ban,setBan]=useState('');const [addA,setAddA]=useState('');const [remA,setRemA]=useState('');
   const [toast,setToast]=useState(null);
   const [admins,setAdmins]=useState(['plxfd-7owlc-xwjkv-mro5e-usydf-lqnhy-7pruh-o5jao-ja4yq-w6wjq-yae']);
-
   function showToast(msg,color='var(--green)'){setToast({msg,color});setTimeout(()=>setToast(null),3000)}
-
   function createBattle(){
     if(form.coin1===form.coin2){showToast('Coins must be different!','var(--red)');return}
-    const nb={id:Date.now(),coin1:form.coin1,coin2:form.coin2,status:'live',votes:0,created:'now'};
-    setBattles(b=>[nb,...b]);
+    setBattles(b=>[{id:Date.now(),coin1:form.coin1,coin2:form.coin2,status:'live',votes:0,created:'now'},...b]);
     showToast(`Battle ${form.coin1} vs ${form.coin2} deployed!`);
   }
-
-  function handleBan(){
-    if(!banInput.trim()){showToast('Enter a principal ID','var(--red)');return}
-    showToast(`User ${banInput.slice(0,12)}… banned`,'var(--red)');
-    setBanInput('');
-  }
-
-  function handleAddAdmin(){
-    if(!addAdmin.trim()){showToast('Enter a principal ID','var(--red)');return}
-    setAdmins(a=>[...a,addAdmin]);
-    showToast(`Admin added`);
-    setAddAdmin('');
-  }
-
-  function handleRemoveAdmin(){
-    if(!removeAdmin.trim()){showToast('Enter a principal ID','var(--red)');return}
-    setAdmins(a=>a.filter(x=>x!==removeAdmin));
-    showToast(`Admin removed`,'var(--gold)');
-    setRemoveAdmin('');
-  }
-
-  const durations=['1 Hour','3 Hours','6 Hours','12 Hours','24 Hours','48 Hours','1 Week'];
-
-  return (
-    <div style={{padding:'40px 0 60px',animation:'slide-up .5s ease',maxWidth:860,margin:'0 auto'}}>
-      {toast&&(
-        <div style={{position:'fixed',top:72,right:24,zIndex:1000,padding:'13px 22px',background:'var(--bg2)',border:`1px solid ${toast.color}`,color:toast.color,fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.1em',boxShadow:`0 0 18px ${toast.color}44`,animation:'scale-in .3s ease'}}>
-          {toast.msg}
-        </div>
-      )}
-
-      {/* Header */}
-      <div style={{textAlign:'center',marginBottom:36}}>
-        <div style={{marginBottom:16}}>
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" style={{margin:'0 auto',display:'block'}}>
-            <path d="M22 4l16 8v12c0 9-7 16-16 18C15 40 6 33 6 24V12L22 4z" stroke="var(--gold)" strokeWidth="2" fill="rgba(245,197,24,0.07)"/>
-          </svg>
-        </div>
-        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(28px,4vw,48px)',fontWeight:900,letterSpacing:'.06em',color:'#fff',marginBottom:8}}>ADMIN PANEL</h1>
-        <div style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.2em',color:'var(--gold)',textShadow:'0 0 10px var(--gold)'}}>SUPER ADMIN</div>
-      </div>
-
-      {/* Create Battle */}
-      <div className="section-box" style={{marginBottom:16}}>
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20}}>
-          <span style={{color:'var(--cyan)',fontSize:18}}>+</span>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>CREATE NEW BATTLE</span>
-        </div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr auto',gap:12,alignItems:'flex-end'}}>
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>COIN 1</div>
-            <div style={{position:'relative'}}>
-              <select value={form.coin1} onChange={e=>setForm(f=>({...f,coin1:e.target.value}))} style={{paddingRight:32}}>
-                {coinSymbols.map(s=><option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
+  const durs=['1 Hour','3 Hours','6 Hours','12 Hours','24 Hours','48 Hours','1 Week'];
+  return(
+    <div className="page">
+      <div style={{maxWidth:860,margin:'0 auto'}}>
+        {toast&&<div style={{position:'fixed',top:64,right:16,zIndex:1000,padding:'12px 20px',background:'var(--bg2)',border:`1px solid ${toast.color}`,color:toast.color,fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.1em',boxShadow:`0 0 18px ${toast.color}44`,animation:'scale-in .3s ease',maxWidth:'calc(100vw - 32px)'}}>{toast.msg}</div>}
+        <div style={{textAlign:'center',marginBottom:32}}>
+          <div style={{marginBottom:14,animation:'shield-pulse 2.5s ease-in-out infinite'}}>
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" style={{margin:'0 auto',display:'block'}}><path d="M22 4l16 8v12c0 9-7 16-16 18C15 40 6 33 6 24V12L22 4z" stroke="var(--gold)" strokeWidth="2" fill="rgba(245,197,24,.07)"/></svg>
           </div>
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>COIN 2</div>
-            <select value={form.coin2} onChange={e=>setForm(f=>({...f,coin2:e.target.value}))} style={{paddingRight:32}}>
-              {coinSymbols.map(s=><option key={s} value={s}>{s}</option>)}
-            </select>
-          </div>
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>DURATION</div>
-            <select value={form.duration} onChange={e=>setForm(f=>({...f,duration:e.target.value}))} style={{paddingRight:32}}>
-              {durations.map(d=><option key={d} value={d}>{d}</option>)}
-            </select>
-          </div>
-          <button onClick={createBattle} style={{
-            fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.1em',
-            padding:'11px 28px',height:42,
-            border:'1px solid var(--green)',
-            background:'rgba(57,255,20,0.1)',
-            color:'var(--green)',cursor:'pointer',transition:'all .2s',
-            whiteSpace:'nowrap',borderRadius:2,
-          }}
-          onMouseEnter={e=>{e.currentTarget.style.background='rgba(57,255,20,0.2)';e.currentTarget.style.boxShadow='0 0 16px rgba(57,255,20,0.3)'}}
-          onMouseLeave={e=>{e.currentTarget.style.background='rgba(57,255,20,0.1)';e.currentTarget.style.boxShadow='none'}}
-          >CREATE</button>
+          <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(24px,6vw,48px)',fontWeight:900,letterSpacing:'.06em',background:'linear-gradient(90deg,var(--gold),#fff,var(--gold))',backgroundSize:'200% auto',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',animation:'neon-sweep 3s linear infinite',marginBottom:8}}>ADMIN PANEL</h1>
+          <div style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.2em',color:'var(--gold)',textShadow:'0 0 10px var(--gold)',animation:'holo-flicker 5s infinite'}}>SUPER ADMIN</div>
         </div>
-      </div>
 
-      {/* All Warriors */}
-      <div className="section-box">
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20}}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="6" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M1 16c0-3.866 2.239-7 5-7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/><circle cx="13" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M12 9c2.761 0 5 3.134 5 7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/></svg>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>ALL WARRIORS</span>
+        <div className="section-box corner-box scan-hover" style={{marginBottom:16,animation:'slide-up .5s ease .05s both'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}><span style={{color:'var(--cyan)',fontSize:18}}>+</span><span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>CREATE NEW BATTLE</span></div>
+          <div className="admin-form-grid">
+            <div><div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>COIN 1</div><select value={form.coin1} onChange={e=>setForm(f=>({...f,coin1:e.target.value}))} style={{paddingRight:32}}>{syms.map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+            <div><div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>COIN 2</div><select value={form.coin2} onChange={e=>setForm(f=>({...f,coin2:e.target.value}))} style={{paddingRight:32}}>{syms.map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+            <div><div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#3a5a52',marginBottom:8}}>DURATION</div><select value={form.duration} onChange={e=>setForm(f=>({...f,duration:e.target.value}))} style={{paddingRight:32}}>{durs.map(d=><option key={d} value={d}>{d}</option>)}</select></div>
+            <button onClick={createBattle} className="admin-create-btn" style={{fontFamily:'var(--font-h)',fontSize:11,fontWeight:700,letterSpacing:'.1em',padding:'11px 24px',height:42,border:'1px solid var(--green)',background:'rgba(57,255,20,.1)',color:'var(--green)',cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',borderRadius:2}}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(57,255,20,.2)';e.currentTarget.style.boxShadow='0 0 16px rgba(57,255,20,.3)'}}
+              onMouseLeave={e=>{e.currentTarget.style.background='rgba(57,255,20,.1)';e.currentTarget.style.boxShadow='none'}}>CREATE</button>
+          </div>
         </div>
-        <table style={{width:'100%',borderCollapse:'collapse'}}>
-          <thead>
-            <tr style={{borderBottom:'1px solid rgba(0,245,212,.15)'}}>
-              {['PRINCIPAL','WINS','LOSSES','TOTAL VOTES'].map(h=>(
-                <th key={h} style={{padding:'10px 14px',textAlign:'left',fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.14em',color:'var(--cyan)',opacity:.7}}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {warriors.length===0?(
-              <tr><td colSpan={4} style={{padding:'32px',textAlign:'center',fontFamily:'var(--font-m)',fontSize:12,color:'#2a3a35'}}>No users yet.</td></tr>
-            ):warriors.map((w,i)=>(
-              <tr key={i} style={{borderBottom:'1px solid rgba(255,255,255,0.03)'}}>
-                <td style={{padding:'12px 14px',fontFamily:'var(--font-m)',fontSize:11,color:'#888'}}>{w.id}</td>
-                <td style={{padding:'12px 14px',color:'var(--green)'}}>{w.wins}</td>
-                <td style={{padding:'12px 14px',color:'var(--red)'}}>{w.losses}</td>
-                <td style={{padding:'12px 14px',color:'var(--cyan)'}}>{w.votes}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
 
-      {/* Active Battles */}
-      <div className="section-box">
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20}}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="#ff2d55" strokeWidth="1.8" strokeLinecap="round"/></svg>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BATTLE MANAGEMENT</span>
+        <div className="section-box corner-box scan-hover" style={{animation:'slide-up .5s ease .12s both'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="6" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M1 16c0-3.866 2.239-7 5-7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/><circle cx="13" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M12 9c2.761 0 5 3.134 5 7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/></svg>
+            <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>ALL WARRIORS</span>
+          </div>
+          <div className="table-wrap">
+            <table style={{width:'100%',borderCollapse:'collapse',minWidth:400}}>
+              <thead><tr style={{borderBottom:'1px solid rgba(0,245,212,.15)'}}>{['PRINCIPAL','WINS','LOSSES','TOTAL VOTES'].map(h=><th key={h} style={{padding:'10px 12px',textAlign:'left',fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.12em',color:'var(--cyan)',opacity:.7,whiteSpace:'nowrap'}}>{h}</th>)}</tr></thead>
+              <tbody><tr><td colSpan={4} style={{padding:'28px',textAlign:'center',fontFamily:'var(--font-m)',fontSize:12,color:'#2a3a35'}}>No users yet.</td></tr></tbody>
+            </table>
+          </div>
         </div>
-        {battles.slice(0,5).map((b,i)=>(
-          <div key={b.id} style={{display:'flex',alignItems:'center',gap:14,padding:'13px 0',borderBottom:i<Math.min(battles.length-1,4)?'1px solid rgba(255,255,255,0.04)':'none',animation:`row-in .4s ease ${i*.06}s both`}}>
-            <div style={{width:7,height:7,borderRadius:'50%',background:b.status==='live'?'var(--green)':'#2a2a2a',boxShadow:b.status==='live'?'0 0 8px var(--green)':'none',flexShrink:0}}/>
-            <div style={{flex:1}}>
-              <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}>
-                <span style={{color:COINS[b.coin1]?.color||'#fff'}}>{b.coin1}</span>
-                <span style={{color:'#333',margin:'0 8px'}}>vs</span>
-                <span style={{color:COINS[b.coin2]?.color||'#fff'}}>{b.coin2}</span>
+
+        <div className="section-box corner-box scan-hover" style={{animation:'slide-up .5s ease .18s both'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="#ff2d55" strokeWidth="1.8" strokeLinecap="round"/></svg>
+            <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BATTLE MANAGEMENT</span>
+          </div>
+          {battles.slice(0,5).map((b,i)=>(
+            <div key={b.id} style={{display:'flex',alignItems:'center',gap:12,padding:'12px 0',borderBottom:i<Math.min(battles.length-1,4)?'1px solid rgba(255,255,255,.04)':'none',animation:`row-in .4s ease ${i*.06}s both`,flexWrap:'wrap'}}>
+              <div style={{width:7,height:7,borderRadius:'50%',background:b.status==='live'?'var(--green)':'#2a2a2a',boxShadow:b.status==='live'?'0 0 8px var(--green)':'none',flexShrink:0}}/>
+              <div style={{flex:1,minWidth:120}}>
+                <div style={{fontFamily:'var(--font-h)',fontSize:12,fontWeight:700}}><span style={{color:COINS[b.coin1]?.color||'#fff'}}>{b.coin1}</span><span style={{color:'#333',margin:'0 6px'}}>vs</span><span style={{color:COINS[b.coin2]?.color||'#fff'}}>{b.coin2}</span></div>
+                <div style={{fontFamily:'var(--font-m)',fontSize:10,color:'#333',marginTop:2}}>{b.votes?.toLocaleString()||0} votes · {b.created}</div>
               </div>
-              <div style={{fontFamily:'var(--font-m)',fontSize:10,color:'#333',marginTop:2}}>{b.votes?.toLocaleString()||0} votes · {b.created}</div>
+              <span style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.1em',padding:'4px 10px',background:b.status==='live'?'rgba(57,255,20,.08)':'rgba(255,255,255,.03)',border:`1px solid ${b.status==='live'?'rgba(57,255,20,.3)':'rgba(255,255,255,.08)'}`,color:b.status==='live'?'var(--green)':'#333',whiteSpace:'nowrap'}}>{b.status.toUpperCase()}</span>
+              {b.status==='live'&&<button onClick={()=>setBattles(x=>x.map(bb=>bb.id===b.id?{...bb,status:'ended'}:bb))} style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.1em',padding:'5px 12px',border:'1px solid var(--red)',background:'transparent',color:'var(--red)',cursor:'pointer',transition:'all .2s',borderRadius:2,flexShrink:0}}
+                onMouseEnter={e=>e.currentTarget.style.background='rgba(255,45,85,.12)'}
+                onMouseLeave={e=>e.currentTarget.style.background='transparent'}>END</button>}
             </div>
-            <span style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.12em',padding:'4px 12px',background:b.status==='live'?'rgba(57,255,20,.08)':'rgba(255,255,255,.03)',border:`1px solid ${b.status==='live'?'rgba(57,255,20,.3)':'rgba(255,255,255,.08)'}`,color:b.status==='live'?'var(--green)':'#333'}}>{b.status.toUpperCase()}</span>
-            {b.status==='live'&&(
-              <button onClick={()=>setBattles(x=>x.map(bb=>bb.id===b.id?{...bb,status:'ended'}:bb))} style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.1em',padding:'5px 13px',border:'1px solid var(--red)',background:'transparent',color:'var(--red)',cursor:'pointer',transition:'all .2s',borderRadius:2}}
-              onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,45,85,0.12)'}}
-              onMouseLeave={e=>{e.currentTarget.style.background='transparent'}}>END</button>
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Ban User */}
-      <div className="section-box">
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20}}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#ff2d55" strokeWidth="1.5"/><path d="M4 9h10" stroke="#ff2d55" strokeWidth="1.5" strokeLinecap="round"/></svg>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BAN USER</span>
+        <div className="section-box corner-box scan-hover" style={{animation:'slide-up .5s ease .24s both'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#ff2d55" strokeWidth="1.5"/><path d="M4 9h10" stroke="#ff2d55" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>BAN USER</span>
+          </div>
+          <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
+            <input value={ban} onChange={e=>setBan(e.target.value)} placeholder="Principal ID to ban" style={{flex:1,minWidth:180}}/>
+            <button onClick={()=>{if(!ban.trim()){showToast('Enter a principal ID','var(--red)');return}showToast(`User ${ban.slice(0,12)}… banned`,'var(--red)');setBan('')}} style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'10px 20px',border:'1px solid var(--red)',background:'rgba(255,45,85,.08)',color:'var(--red)',cursor:'pointer',transition:'all .2s',borderRadius:2,whiteSpace:'nowrap'}}
+              onMouseEnter={e=>e.currentTarget.style.background='rgba(255,45,85,.18)'}
+              onMouseLeave={e=>e.currentTarget.style.background='rgba(255,45,85,.08)'}>BAN</button>
+          </div>
         </div>
-        <div style={{display:'flex',gap:12}}>
-          <input value={banInput} onChange={e=>setBanInput(e.target.value)} placeholder="Principal ID to ban" style={{flex:1}}/>
-          <button onClick={handleBan} style={{
-            fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',
-            padding:'10px 22px',border:'1px solid var(--red)',background:'rgba(255,45,85,0.08)',
-            color:'var(--red)',cursor:'pointer',transition:'all .2s',
-            display:'flex',alignItems:'center',gap:8,whiteSpace:'nowrap',borderRadius:2,
-          }}
-          onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,45,85,0.18)'}}
-          onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,45,85,0.08)'}}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#ff2d55" strokeWidth="1.3"/><path d="M3 7h8" stroke="#ff2d55" strokeWidth="1.3" strokeLinecap="round"/></svg>
-            BAN
-          </button>
-        </div>
-      </div>
 
-      {/* Admin Management */}
-      <div className="section-box">
-        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:20}}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M1 16c0-3.866 2.686-7 6-7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/><path d="M13 10v6M10 13h6" stroke="#00f5d4" strokeWidth="1.5" strokeLinecap="round"/></svg>
-          <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>ADMIN MANAGEMENT</span>
-        </div>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24}}>
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'var(--green)',opacity:.7,marginBottom:10}}>ADD ADMIN</div>
-            <div style={{display:'flex',gap:8}}>
-              <input value={addAdmin} onChange={e=>setAddAdmin(e.target.value)} placeholder="Principal ID" style={{flex:1}}/>
-              <button onClick={handleAddAdmin} style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'10px 18px',border:'1px solid var(--green)',background:'rgba(57,255,20,0.08)',color:'var(--green)',cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',borderRadius:2}}
-              onMouseEnter={e=>{e.currentTarget.style.background='rgba(57,255,20,0.18)'}}
-              onMouseLeave={e=>{e.currentTarget.style.background='rgba(57,255,20,0.08)'}}>ADD</button>
+        <div className="section-box corner-box scan-hover" style={{animation:'slide-up .5s ease .30s both'}}>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7" cy="6" r="3" stroke="#00f5d4" strokeWidth="1.3"/><path d="M1 16c0-3.866 2.686-7 6-7" stroke="#00f5d4" strokeWidth="1.3" strokeLinecap="round"/><path d="M13 10v6M10 13h6" stroke="#00f5d4" strokeWidth="1.5" strokeLinecap="round"/></svg>
+            <span style={{fontFamily:'var(--font-h)',fontSize:13,fontWeight:700,letterSpacing:'.1em',color:'#fff'}}>ADMIN MANAGEMENT</span>
+          </div>
+          <div className="admin-mgmt-grid">
+            <div>
+              <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'var(--green)',opacity:.7,marginBottom:10}}>ADD ADMIN</div>
+              <div style={{display:'flex',gap:8}}>
+                <input value={addA} onChange={e=>setAddA(e.target.value)} placeholder="Principal ID" style={{flex:1}}/>
+                <button onClick={()=>{if(!addA.trim()){showToast('Enter a principal ID','var(--red)');return}setAdmins(a=>[...a,addA]);showToast('Admin added');setAddA('')}} style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'10px 16px',border:'1px solid var(--green)',background:'rgba(57,255,20,.08)',color:'var(--green)',cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',borderRadius:2}}
+                  onMouseEnter={e=>e.currentTarget.style.background='rgba(57,255,20,.18)'}
+                  onMouseLeave={e=>e.currentTarget.style.background='rgba(57,255,20,.08)'}>ADD</button>
+              </div>
+            </div>
+            <div>
+              <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'var(--red)',opacity:.7,marginBottom:10}}>REMOVE ADMIN</div>
+              <div style={{display:'flex',gap:8}}>
+                <input value={remA} onChange={e=>setRemA(e.target.value)} placeholder="Principal ID" style={{flex:1}}/>
+                <button onClick={()=>{if(!remA.trim()){showToast('Enter a principal ID','var(--red)');return}setAdmins(a=>a.filter(x=>x!==remA));showToast('Admin removed','var(--gold)');setRemA('')}} style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'10px 16px',border:'1px solid rgba(255,45,85,.5)',background:'rgba(255,45,85,.06)',color:'var(--red)',cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',borderRadius:2}}
+                  onMouseEnter={e=>e.currentTarget.style.background='rgba(255,45,85,.16)'}
+                  onMouseLeave={e=>e.currentTarget.style.background='rgba(255,45,85,.06)'}>REMOVE</button>
+              </div>
             </div>
           </div>
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'var(--red)',opacity:.7,marginBottom:10}}>REMOVE ADMIN</div>
-            <div style={{display:'flex',gap:8}}>
-              <input value={removeAdmin} onChange={e=>setRemoveAdmin(e.target.value)} placeholder="Principal ID" style={{flex:1}}/>
-              <button onClick={handleRemoveAdmin} style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'10px 18px',border:'1px solid rgba(255,45,85,.5)',background:'rgba(255,45,85,0.06)',color:'var(--red)',cursor:'pointer',transition:'all .2s',whiteSpace:'nowrap',borderRadius:2}}
-              onMouseEnter={e=>{e.currentTarget.style.background='rgba(255,45,85,0.16)'}}
-              onMouseLeave={e=>{e.currentTarget.style.background='rgba(255,45,85,0.06)'}}>REMOVE</button>
-            </div>
-          </div>
+          {admins.length>0&&<div style={{marginTop:18}}><div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#2a3a35',marginBottom:10}}>CURRENT ADMINS</div>{admins.map((a,i)=><div key={i} style={{fontFamily:'var(--font-m)',fontSize:10,color:'#3a5a52',padding:'6px 0',borderBottom:'1px solid rgba(255,255,255,.03)',wordBreak:'break-all'}}>{a}</div>)}</div>}
         </div>
-        {admins.length>0&&(
-          <div style={{marginTop:20}}>
-            <div style={{fontFamily:'var(--font-h)',fontSize:8,letterSpacing:'.2em',color:'#2a3a35',marginBottom:10}}>CURRENT ADMINS</div>
-            {admins.map((a,i)=>(
-              <div key={i} style={{fontFamily:'var(--font-m)',fontSize:10,color:'#3a5a52',padding:'6px 0',borderBottom:'1px solid rgba(255,255,255,0.03)',wordBreak:'break-all'}}>{a}</div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-/* ── Ticker ───────────────────────────────────────────────────────────── */
-function Ticker() {
+/* ── Ticker ─────────────────────────────────────────────────────────────── */
+function Ticker(){
   const items=[...Object.values(COINS),...Object.values(COINS)];
-  return (
-    <div style={{height:30,overflow:'hidden',background:'rgba(0,245,212,0.025)',borderBottom:'1px solid rgba(0,245,212,0.07)',display:'flex',alignItems:'center'}}>
+  return(
+    <div className="ticker">
       <div style={{display:'flex',whiteSpace:'nowrap',animation:'ticker-scroll 28s linear infinite'}}>
         {items.map((c,i)=>(
-          <span key={i} style={{fontFamily:'var(--font-m)',fontSize:11,padding:'0 22px',color:'#333',borderRight:'1px solid rgba(255,255,255,0.03)'}}>
-            <span style={{color:c.color,marginRight:6}}>{c.symbol}</span>
-            ${c.price.toLocaleString()}
-            <span style={{marginLeft:6,color:c.change>=0?'var(--green)':'var(--red)'}}>{c.change>=0?'▲':'▼'}{Math.abs(c.change)}%</span>
+          <span key={i} style={{fontFamily:'var(--font-m)',fontSize:11,padding:'0 20px',color:'#333',borderRight:'1px solid rgba(255,255,255,.03)'}}>
+            <span style={{color:c.color,marginRight:6}}>{c.symbol}</span>${c.price.toLocaleString()}<span style={{marginLeft:6,color:c.change>=0?'var(--green)':'var(--red)'}}>{c.change>=0?'▲':'▼'}{Math.abs(c.change)}%</span>
           </span>
         ))}
       </div>
@@ -780,97 +648,84 @@ function Ticker() {
   );
 }
 
-/* ── Navbar ───────────────────────────────────────────────────────────── */
-function Navbar({tab,setTab,connected,setConnected}) {
-  return (
-    <nav style={{position:'sticky',top:0,zIndex:100,background:'rgba(5,5,8,0.94)',backdropFilter:'blur(14px)',borderBottom:'1px solid rgba(0,245,212,0.09)',padding:'0 36px',display:'flex',alignItems:'center',gap:28,height:58}}>
-      <div style={{display:'flex',alignItems:'center',gap:10,cursor:'pointer'}} onClick={()=>setTab('ARENA')}>
-        <div style={{width:34,height:34,background:'linear-gradient(135deg,var(--cyan),var(--purple))',clipPath:'polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontFamily:'var(--font-h)',fontWeight:900,color:'#000',flexShrink:0}}>KK</div>
-        <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:13,letterSpacing:'.08em'}}>
-          <span style={{color:'var(--cyan)',textShadow:'0 0 10px var(--cyan)'}}>KRYPTO</span>{' '}
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+function Navbar({tab,setTab,connected,setConnected}){
+  return(
+    <>
+    <nav className="navbar">
+      <div style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer'}} onClick={()=>setTab('ARENA')}>
+        <div style={{width:32,height:32,background:'linear-gradient(135deg,var(--cyan),var(--purple))',clipPath:'polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,fontFamily:'var(--font-h)',fontWeight:900,color:'#000',flexShrink:0}}>KK</div>
+        <div className="nav-logo-text">
+          <span style={{color:'var(--cyan)',textShadow:'0 0 10px var(--cyan)'}}>KRYPTO</span>
           <span style={{color:'var(--red)',textShadow:'0 0 10px var(--red)'}}>KOMBAT</span>
         </div>
       </div>
       <div style={{flex:1}}/>
-      <div style={{display:'flex',gap:2}}>
+      <div className="nav-tabs">
         {['ARENA','LEADERBOARD','PROFILE','ADMIN'].map(t=>(
-          <button key={t} onClick={()=>setTab(t)} style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.12em',padding:'8px 15px',border:'none',background:'transparent',color:tab===t?'var(--cyan)':'#444',cursor:'pointer',transition:'all .2s',position:'relative'}}>
-            {t}
-            {tab===t&&<div style={{position:'absolute',bottom:0,left:'18%',right:'18%',height:2,background:'var(--cyan)',boxShadow:'0 0 8px var(--cyan)'}}/>}
+          <button key={t} onClick={()=>setTab(t)} style={{fontFamily:'var(--font-h)',fontSize:10,letterSpacing:'.12em',padding:'8px 14px',border:'none',background:'transparent',color:tab===t?'var(--cyan)':'#444',cursor:'pointer',transition:'all .2s',position:'relative'}}>
+            {t}{tab===t&&<div style={{position:'absolute',bottom:0,left:'18%',right:'18%',height:2,background:'var(--cyan)',boxShadow:'0 0 8px var(--cyan)'}}/>}
           </button>
         ))}
       </div>
-      <button onClick={()=>setConnected(c=>!c)} className="clipped" style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.1em',padding:'9px 20px',border:`1px solid ${connected?'var(--green)':'var(--cyan)'}`,background:connected?'rgba(57,255,20,0.07)':'transparent',color:connected?'var(--green)':'var(--cyan)',cursor:'pointer',transition:'all .2s',boxShadow:connected?'0 0 12px rgba(57,255,20,0.25)':'none'}}>
+      <button onClick={()=>setConnected(c=>!c)} className="clipped" style={{fontFamily:'var(--font-h)',fontSize:10,fontWeight:700,letterSpacing:'.08em',padding:'8px 16px',border:`1px solid ${connected?'var(--green)':'var(--cyan)'}`,background:connected?'rgba(57,255,20,.07)':'transparent',color:connected?'var(--green)':'var(--cyan)',cursor:'pointer',transition:'all .2s',boxShadow:connected?'0 0 12px rgba(57,255,20,.25)':'none',whiteSpace:'nowrap'}}>
         {connected?'◉ CONNECTED':'CONNECT'}
       </button>
     </nav>
+    <div className="nav-bot">
+      {[{t:'ARENA',icon:'⚔'},{t:'LEADERBOARD',icon:'🏆'},{t:'PROFILE',icon:'👤'},{t:'ADMIN',icon:'⚙'}].map(({t,icon})=>(
+        <button key={t} onClick={()=>setTab(t)} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3,border:'none',background:'transparent',cursor:'pointer',position:'relative',padding:'6px 0'}}>
+          <span style={{fontSize:18}}>{icon}</span>
+          <span style={{fontFamily:'var(--font-h)',fontSize:7,letterSpacing:'.1em',color:tab===t?'var(--cyan)':'#444'}}>{t}</span>
+          {tab===t&&<div style={{position:'absolute',top:0,left:'20%',right:'20%',height:2,background:'var(--cyan)',boxShadow:'0 0 8px var(--cyan)'}}/>}
+        </button>
+      ))}
+    </div>
+    </>
   );
 }
 
-/* ── App ─────────────────────────────────────────────────────────────── */
-function App() {
+/* ── App ─────────────────────────────────────────────────────────────────── */
+function App(){
   const [tab,setTab]=useState(()=>localStorage.getItem('kk_tab')||'ARENA');
   const [connected,setConnected]=useState(false);
   const [tweakOpen,setTweakOpen]=useState(false);
-
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "accentColor": "#00f5d4",
-    "redColor": "#ff2d55",
-    "bgDark": "#050508",
-    "glowIntensity": "high"
-  }/*EDITMODE-END*/;
+  const TWEAK_DEFAULTS=/*EDITMODE-BEGIN*/{"accentColor":"#00f5d4","redColor":"#ff2d55","glowIntensity":"low"}/*EDITMODE-END*/;
   const [tweaks,setTweaks]=useState(TWEAK_DEFAULTS);
-
   useEffect(()=>{localStorage.setItem('kk_tab',tab)},[tab]);
-
   useEffect(()=>{
     window.addEventListener('message',e=>{
-      if(e.data?.type==='__activate_edit_mode') setTweakOpen(true);
-      if(e.data?.type==='__deactivate_edit_mode') setTweakOpen(false);
+      if(e.data?.type==='__activate_edit_mode')setTweakOpen(true);
+      if(e.data?.type==='__deactivate_edit_mode')setTweakOpen(false);
     });
     window.parent.postMessage({type:'__edit_mode_available'},'*');
   },[]);
-
-  function updateTweak(key,val){
-    setTweaks(t=>{const next={...t,[key]:val};window.parent.postMessage({type:'__edit_mode_set_keys',edits:next},'*');return next});
-  }
-
-  return (
+  function updateTweak(k,v){setTweaks(t=>{const n={...t,[k]:v};window.parent.postMessage({type:'__edit_mode_set_keys',edits:n},'*');return n})}
+  return(
     <div style={{minHeight:'100vh',position:'relative',zIndex:1}}>
       <Navbar tab={tab} setTab={setTab} connected={connected} setConnected={setConnected}/>
       <Ticker/>
-      <div style={{maxWidth:1100,margin:'0 auto',padding:'0 24px'}}>
+      <div className="page-inner">
         {tab==='ARENA'&&<ArenaTab/>}
         {tab==='LEADERBOARD'&&<LeaderboardTab/>}
         {tab==='PROFILE'&&<ProfileTab connected={connected} setTab={setTab}/>}
         {tab==='ADMIN'&&<AdminTab/>}
       </div>
-      <div style={{position:'fixed',bottom:0,left:0,right:0,height:1,background:'linear-gradient(90deg,transparent,var(--cyan),transparent)',opacity:.2}}/>
-
-      {/* Tweaks */}
+      <div style={{position:'fixed',bottom:0,left:0,right:0,height:1,background:'linear-gradient(90deg,transparent,var(--cyan),transparent)',opacity:.2,zIndex:99}}/>
       {tweakOpen&&(
-        <div style={{position:'fixed',bottom:24,right:24,zIndex:9998,background:'var(--bg2)',border:'1px solid rgba(0,245,212,0.22)',padding:22,width:250,boxShadow:'0 0 28px rgba(0,245,212,0.12)',animation:'scale-in .3s ease'}}>
-          <div style={{fontFamily:'var(--font-h)',fontSize:11,color:'var(--cyan)',letterSpacing:'.15em',marginBottom:18}}>⚙ TWEAKS</div>
-          {[{key:'accentColor',label:'ACCENT COLOR',cssVar:'--cyan'},{key:'redColor',label:'COMBAT COLOR',cssVar:'--red'}].map(({key,label,cssVar})=>(
-            <div key={key} style={{marginBottom:14}}>
-              <div style={{fontFamily:'var(--font-h)',fontSize:9,color:'#3a5a52',letterSpacing:'.12em',marginBottom:7}}>{label}</div>
-              <input type="color" value={tweaks[key]} onChange={e=>{updateTweak(key,e.target.value);document.documentElement.style.setProperty(cssVar,e.target.value)}} style={{width:'100%',height:34,background:'none',border:'1px solid rgba(255,255,255,.08)',cursor:'pointer',padding:2}}/>
+        <div style={{position:'fixed',bottom:70,right:16,zIndex:9998,background:'var(--bg2)',border:'1px solid rgba(0,245,212,.22)',padding:20,width:220,boxShadow:'0 0 28px rgba(0,245,212,.12)',animation:'scale-in .3s ease'}}>
+          <div style={{fontFamily:'var(--font-h)',fontSize:11,color:'var(--cyan)',letterSpacing:'.15em',marginBottom:16}}>⚙ TWEAKS</div>
+          {[{key:'accentColor',label:'ACCENT',cssVar:'--cyan'},{key:'redColor',label:'COMBAT',cssVar:'--red'}].map(({key,label,cssVar})=>(
+            <div key={key} style={{marginBottom:12}}>
+              <div style={{fontFamily:'var(--font-h)',fontSize:9,color:'#3a5a52',letterSpacing:'.1em',marginBottom:6}}>{label} COLOR</div>
+              <input type="color" value={tweaks[key]} onChange={e=>{updateTweak(key,e.target.value);document.documentElement.style.setProperty(cssVar,e.target.value)}} style={{width:'100%',height:32,background:'none',border:'1px solid rgba(255,255,255,.08)',cursor:'pointer',padding:2}}/>
             </div>
           ))}
-          <div>
-            <div style={{fontFamily:'var(--font-h)',fontSize:9,color:'#3a5a52',letterSpacing:'.12em',marginBottom:8}}>GLOW INTENSITY</div>
-            <div style={{display:'flex',gap:6}}>
-              {['low','medium','high'].map(g=>(
-                <button key={g} onClick={()=>updateTweak('glowIntensity',g)} style={{fontFamily:'var(--font-h)',fontSize:9,letterSpacing:'.06em',padding:'5px 10px',border:`1px solid ${tweaks.glowIntensity===g?'var(--cyan)':'rgba(255,255,255,.07)'}`,background:'transparent',color:tweaks.glowIntensity===g?'var(--cyan)':'#333',cursor:'pointer',textTransform:'uppercase',flex:1}}>{g}</button>
-              ))}
-            </div>
-          </div>
         </div>
       )}
     </div>
   );
 }
-
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 </body>
